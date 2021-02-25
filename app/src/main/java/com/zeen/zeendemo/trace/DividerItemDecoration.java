@@ -31,7 +31,6 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     // 写左边日期字的画笔( 时间 + 日期)
     private Paint mPaint1;
-//    private Paint mPaint2;
 
     // 左 上偏移长度
     private int itemView_leftinterval;
@@ -39,6 +38,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     // 轴点半径
     private int circle_radius;
+    // 路径原点半径
+    private int point_radius;
 
     // 图标
     private Bitmap mIcon;
@@ -56,9 +57,6 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         mPaint1.setColor(Color.BLUE);
         mPaint1.setTextSize(30);
 
-//        mPaint2 = new Paint();
-//        mPaint2.setColor(Color.BLUE);
-
         // 赋值ItemView的左偏移长度为200
         itemView_leftinterval = 200;
 
@@ -67,6 +65,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
         // 赋值轴点圆的半径为10
         circle_radius = 10;
+        point_radius = 2;
 
         // 获取图标资源
         mIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.logo);
@@ -86,9 +85,6 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         mPaint1.setColor(Color.BLUE);
         mPaint1.setTextSize(30);
 
-//        mPaint2 = new Paint();
-//        mPaint2.setColor(Color.BLUE);
-
         // 赋值ItemView的左偏移长度为200
         itemView_leftinterval = 200;
 
@@ -96,7 +92,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         itemView_topinterval = 50;
 
         // 赋值轴点圆的半径为10
-        circle_radius = 10;
+        circle_radius = 16;
+        point_radius = 5;
 
         // 获取图标资源
         mIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.logo);
@@ -107,10 +104,16 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-
         // 设置ItemView的左 & 上偏移长度分别为200 px & 50px,即此为onDraw()可绘制的区域
         outRect.set(itemView_leftinterval, itemView_topinterval, 0, 0);
 
+
+//        //第一个ItemView不需要在上面绘制分割线
+//        if (parent.getChildAdapterPosition(view) == 0){
+//            outRect.top = 0;
+//        } else {
+//            outRect.top = 2;
+//        }
     }
 
     // 重写onDraw（）
@@ -122,12 +125,15 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         // 获取RecyclerView的Child view的个数
         int childCount = parent.getChildCount();
 
+//        String temp = mStampList.get(0);
+//        c.drawText(temp, 0, 0, mPaint1);
+
+        //共同点，头元素，尾元素
+        //需要画的点，不是一个item的上端和下端，而是中间填充着这些点!!!而drawCircle这些点的依据是根据item位置和数量决定的(目前)
         // 遍历每个Item，分别获取它们的位置信息，然后再绘制对应的分割线
         for (int i = 0; i < childCount; i++) {
-
             // 获取每个Item对象
             View child = parent.getChildAt(i);
-
             /**
              * 绘制轴点
              */
@@ -137,24 +143,24 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             // 绘制轴点圆
 //            c.drawCircle(centerx, centery, circle_radius, mPaint);
             // 通过Canvas绘制角标
-            c.drawBitmap(mIcon, centerx - 2 * circle_radius, centery - 2 * circle_radius, mPaint);
-
+//            c.drawBitmap(mIcon, centerx - 2 * circle_radius, centery - 2 * circle_radius, mPaint);
+//            c.drawBitmap(mIcon, centerx, centery, mPaint);
             /**
-             * 绘制上半轴线
+             * 绘制上半轴线//如果是第一个item，上半不需要画point
              */
             // 上端点坐标(x,y)
             float upLine_up_x = centerx;
-            float upLine_up_y = child.getTop() - itemView_topinterval;
-
+            float upLine_up_y = child.getTop();
             // 下端点坐标(x,y)
             float upLine_bottom_x = centerx;
             float upLine_bottom_y = centery;
-
             //绘制上半部轴线
-            c.drawLine(upLine_up_x, upLine_up_y, upLine_bottom_x, upLine_bottom_y, mPaint);
+//            c.drawLine(upLine_up_x, upLine_up_y, upLine_bottom_x, upLine_bottom_y, mPaint);
+//            c.drawCircle(upLine_up_x, upLine_up_y, point_radius, mPaint);
+//            c.drawCircle(upLine_bottom_x, upLine_bottom_y, point_radius, mPaint);
 
             /**
-             * 绘制下半轴线
+             * 绘制下半轴线//如果是最后一个item，下半不需要画point
              */
             // 上端点坐标(x,y)
             float bottomLine_up_x = centerx;
@@ -165,7 +171,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             float bottomLine_bottom_y = child.getBottom();
 
             //绘制下半部轴线
-            c.drawLine(bottomLine_up_x, bottom_up_y, bottomLine_bottom_x, bottomLine_bottom_y, mPaint);
+//            c.drawLine(bottomLine_up_x, bottom_up_y, bottomLine_bottom_x, bottomLine_bottom_y, mPaint);
+            c.drawCircle(bottomLine_up_x, bottom_up_y, point_radius, mPaint);
+            c.drawCircle(bottomLine_bottom_x, bottomLine_bottom_y, point_radius, mPaint);
 
             /**
              * 绘制左边时间文本
@@ -177,9 +185,52 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             float Text_y = upLine_bottom_y;
 
             //左侧月份 需要处理 同月不显示text:("")
-            c.drawText(mStampList.get(i), Text_x, Text_y, mPaint1);
+            if (index == 0) {//头
+                c.drawText(mStampList.get(index), Text_x, Text_y, mPaint1);
+//                c.drawBitmap(mIcon, centerx- 2 * circle_radius, centery- 2 * circle_radius, mPaint);
+                c.drawCircle(centerx, centery, circle_radius, mPaint);
+                //bottom
+                c.drawCircle(bottomLine_up_x, bottom_up_y, point_radius, mPaint);
+                c.drawCircle(bottomLine_bottom_x, bottomLine_bottom_y, point_radius, mPaint);
 
+            } else if (index == mStampList.size()) {//尾
+                //up
+                c.drawCircle(upLine_up_x, upLine_up_y, point_radius, mPaint);
+                c.drawCircle(upLine_bottom_x, upLine_bottom_y, point_radius, mPaint);
 
+                if (mStampList.get(index - 1).equals(mStampList.get(index))) {
+                    c.drawText("", Text_x, Text_y, mPaint1);
+                } else {
+                    c.drawText(mStampList.get(index), Text_x, Text_y, mPaint1);
+//                    c.drawBitmap(mIcon, centerx- 2 * circle_radius, centery- 2 * circle_radius, mPaint);
+                    c.drawCircle(centerx, centery, circle_radius, mPaint);
+                }
+            } else if (mStampList.get(index - 1).equals(mStampList.get(index))) {//中间equals
+                //up
+                c.drawCircle(upLine_up_x, upLine_up_y, point_radius, mPaint);
+                c.drawCircle(upLine_bottom_x, upLine_bottom_y, point_radius, mPaint);
+                //bottom
+                c.drawCircle(bottomLine_up_x, bottom_up_y, point_radius, mPaint);
+                c.drawCircle(bottomLine_bottom_x, bottomLine_bottom_y, point_radius, mPaint);
+                c.drawText("", Text_x, Text_y, mPaint1);
+            } else {//中间not equals
+                //up
+                c.drawCircle(upLine_up_x, upLine_up_y, point_radius, mPaint);
+                c.drawCircle(upLine_bottom_x, upLine_bottom_y, point_radius, mPaint);
+                //bottom
+                c.drawCircle(bottomLine_up_x, bottom_up_y, point_radius, mPaint);
+                c.drawCircle(bottomLine_bottom_x, bottomLine_bottom_y, point_radius, mPaint);
+                c.drawText(mStampList.get(index), Text_x, Text_y, mPaint1);
+//                c.drawBitmap(mIcon, centerx- 2 * circle_radius, centery- 2 * circle_radius, mPaint);
+                c.drawCircle(centerx, centery, circle_radius, mPaint);
+            }
+
+//            if (temp.equals(mStampList.get(i))) {
+//                c.drawText("", Text_x, Text_y, mPaint1);
+//            } else {
+//                temp = mStampList.get(i);
+//                c.drawText(mStampList.get(i), Text_x, Text_y, mPaint1);
+//            }
         }
     }
 
