@@ -1,0 +1,30 @@
+package com.zeen.zeendemo;
+
+import android.graphics.Rect;
+import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+/**
+ * Created by Csy on 2/24/21.
+ * e-mail:altman29@foxmail.com
+ * Desc:
+ */
+class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+    private int space;
+
+    public SpacesItemDecoration(int space) {
+        this.space = space;
+    }
+
+    @Override
+    public void getItemOffsets(Rect outRect, View view,
+                               RecyclerView parent, RecyclerView.State state) {
+        outRect.left = space;
+        outRect.right = space;
+        outRect.bottom = space;
+        outRect.top = space;
+
+        // Add top margin only for the first item to avoid double space between items
+    }
+}
