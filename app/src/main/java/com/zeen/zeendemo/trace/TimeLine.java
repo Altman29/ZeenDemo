@@ -80,7 +80,14 @@ public class TimeLine extends RecyclerView.ItemDecoration {
 
         // 设置ItemView的左 & 上偏移长度分别为200 px & 50px,即此为onDraw()可绘制的区域
         outRect.set(itemView_leftinterval, itemView_topinterval, 0, 0);
-
+        //第一个ItemView不需要在上面绘制分割线
+        if (parent.getChildAdapterPosition(view) == 0) {
+            outRect.top = 0;
+        } else if (parent.getChildAdapterPosition(view) == 3) {
+            outRect.top = itemView_topinterval * 3;
+        } else {
+            outRect.top = itemView_topinterval;
+        }
     }
 
     // 重写onDraw（）
