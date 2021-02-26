@@ -10,5 +10,6 @@
     <color name="red">#DC143C</color>
 
     <color name="trace_point">#36CB99</color>
+    <color name="bg_color">#F4F3F3</color>
 
 </resources>

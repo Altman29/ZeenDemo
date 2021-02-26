@@ -1,4 +1,4 @@
-package com.zeen.zeendemo;
+package com.zeen.zeendemo.horizontallist;
 
 /**
  * Created by Csy on 2/24/21.

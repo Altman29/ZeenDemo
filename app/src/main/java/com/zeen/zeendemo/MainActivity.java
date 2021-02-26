@@ -1,56 +1,68 @@
 package com.zeen.zeendemo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.zeen.zeendemo.countrypicker.CountryActivity;
+import com.zeen.zeendemo.horizontallist.HorizontalRvActivity;
+import com.zeen.zeendemo.tracerv.TraceActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private List<DataBean> lists;
+    private Button but;
+    private TextView tv;
+    private TextView tv1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        initData();
-        initRecyclerView();
-    }
-
-    private void initRecyclerView() {
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        manager.setOrientation(RecyclerView.HORIZONTAL);
-        mRecyclerView.setLayoutManager(manager);
-        recyclerViewadapter adapter = new recyclerViewadapter(lists, this);
-        adapter.setOnItemClickListerner(new recyclerViewadapter.OnItemClickListerner() {
-            @Override
-            public void onItemClick(int position) {
-                //go details
-                ToastUtils.showToastShort(MainActivity.this, lists.get(position).getText1() + " >>>");
-            }
-        });
-        int space = 20;
-        mRecyclerView.addItemDecoration(new SpacesItemDecoration(space));
-        mRecyclerView.setAdapter(adapter);
-    }
-
-    private void initData() {
-        lists = new ArrayList<>();
-        lists.add(new DataBean(R.mipmap.ic_launcher, "111", "111", R.color.design_default_color_error));
-        lists.add(new DataBean(R.mipmap.ic_launcher, "222", "222", R.color.design_default_color_primary));
-        lists.add(new DataBean(R.mipmap.ic_launcher, "333", "333", R.color.design_default_color_secondary));
     }
 
     private void initView() {
-        mRecyclerView = findViewById(R.id.rv_relax);
+        but = (Button) findViewById(R.id.but);
+        tv = (TextView) findViewById(R.id.tv);
+        tv1 = (TextView) findViewById(R.id.tv1);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        switch (requestCode) {
+            case 12:
+                if (resultCode == RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    String countryName = bundle.getString("countryName");
+                    String countryNumber = bundle.getString("countryNumber");
+
+                    tv.setText(countryNumber);
+                    tv1.setText(countryName);
+
+                }
+                break;
+
+            default:
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 
+    public void goTrace(View view) {
+        startActivity(new Intent(this, TraceActivity.class));
+    }
+
+    public void goHorizontalRv(View view) {
+        startActivity(new Intent(this, HorizontalRvActivity.class));
+    }
+
+    public void goCountryPicker(View view) {
+        startActivityForResult(new Intent(this, CountryActivity.class),12);
+    }
 }

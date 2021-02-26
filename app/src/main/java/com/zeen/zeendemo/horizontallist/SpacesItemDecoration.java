@@ -1,4 +1,4 @@
-package com.zeen.zeendemo;
+package com.zeen.zeendemo.horizontallist;
 
 import android.graphics.Rect;
 import android.view.View;

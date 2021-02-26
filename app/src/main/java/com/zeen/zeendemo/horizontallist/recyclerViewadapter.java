@@ -1,4 +1,4 @@
-package com.zeen.zeendemo;
+package com.zeen.zeendemo.horizontallist;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.zeen.zeendemo.R;
 
 import java.util.List;
 
