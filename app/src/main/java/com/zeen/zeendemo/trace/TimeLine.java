@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * e-mail:altman29@foxmail.com
  * Desc:
  */
-public class DividerItemDecoration extends RecyclerView.ItemDecoration {
+public class TimeLine extends RecyclerView.ItemDecoration {
 
     private List<String> mStampList;
 
@@ -44,7 +44,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     // 图标
     private Bitmap mIcon;
 
-    public DividerItemDecoration(Context context, List<String> list) {
+    public TimeLine(Context context, List<String> list) {
 
         mStampList = list;//左侧时间list
 
@@ -77,16 +77,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
+
         // 设置ItemView的左 & 上偏移长度分别为200 px & 50px,即此为onDraw()可绘制的区域
         outRect.set(itemView_leftinterval, itemView_topinterval, 0, 0);
 
-
-//        //第一个ItemView不需要在上面绘制分割线
-//        if (parent.getChildAdapterPosition(view) == 0){
-//            outRect.top = 0;
-//        } else {
-//            outRect.top = 2;
-//        }
     }
 
     // 重写onDraw（）
@@ -98,10 +92,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         // 获取RecyclerView的Child view的个数
         int childCount = parent.getChildCount();
 
-//        String temp = mStampList.get(0);
-//        c.drawText(temp, 0, 0, mPaint1);
+        int iconWidth = mIcon.getWidth();
+        int iconHeight = mIcon.getHeight();
 
-        //共同点，头元素，尾元素
         //需要画的点，不是一个item的上端和下端，而是中间填充着这些点!!!而drawCircle这些点的依据是根据item位置和数量决定的(目前)
         // 遍历每个Item，分别获取它们的位置信息，然后再绘制对应的分割线
         for (int i = 0; i < childCount; i++) {
@@ -113,13 +106,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             // 轴点 = 圆 = 圆心(x,y)
             float centerx = child.getLeft() - itemView_leftinterval / 3;
             float centery = child.getTop() - itemView_topinterval + (itemView_topinterval + child.getHeight()) / 2;
-            // 绘制轴点圆
-//            c.drawCircle(centerx, centery, circle_radius, mPaint);
-            // 通过Canvas绘制角标
-//            c.drawBitmap(mIcon, centerx - 2 * circle_radius, centery - 2 * circle_radius, mPaint);
-//            c.drawBitmap(mIcon, centerx, centery, mPaint);
             /**
-             * 绘制上半轴线//如果是第一个item，上半不需要画point
+             * a.绘制上半轴线//如果是第一个item，上半不需要画point
              */
             // 上端点坐标(x,y)
             float upLine_up_x = centerx;
@@ -127,13 +115,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             // 下端点坐标(x,y)
             float upLine_bottom_x = centerx;
             float upLine_bottom_y = centery;
-            //绘制上半部轴线
-//            c.drawLine(upLine_up_x, upLine_up_y, upLine_bottom_x, upLine_bottom_y, mPaint);
-//            c.drawCircle(upLine_up_x, upLine_up_y, point_radius, mPaint);
-//            c.drawCircle(upLine_bottom_x, upLine_bottom_y, point_radius, mPaint);
 
             /**
-             * 绘制下半轴线//如果是最后一个item，下半不需要画point
+             * b.绘制下半轴线//如果是最后一个item，下半不需要画point
              */
             // 上端点坐标(x,y)
             float bottomLine_up_x = centerx;
@@ -142,11 +126,6 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             // 下端点坐标(x,y)
             float bottomLine_bottom_x = centerx;
             float bottomLine_bottom_y = child.getBottom();
-
-            //绘制下半部轴线
-//            c.drawLine(bottomLine_up_x, bottom_up_y, bottomLine_bottom_x, bottomLine_bottom_y, mPaint);
-            c.drawCircle(bottomLine_up_x, bottom_up_y, point_radius, mPaint);
-            c.drawCircle(bottomLine_bottom_x, bottomLine_bottom_y, point_radius, mPaint);
 
             /**
              * 绘制左边时间文本
@@ -159,11 +138,14 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
             //左侧月份 需要处理 同月不显示text:("")
             if (index == 0) {//头
+                //TimeStamp need show
                 c.drawText(mStampList.get(index), Text_x, Text_y, mPaint1);
-//                c.drawBitmap(mIcon, centerx- 2 * circle_radius, centery- 2 * circle_radius, mPaint);
-                c.drawCircle(centerx, centery, circle_radius, mPaint);
+                //Node need show
+                c.drawBitmap(mIcon, centerx - iconWidth / 2, centery - iconHeight / 2, mPaint);
+//                c.drawBitmap(mIcon, child.getLeft(), itemView_topinterval/2, mPaint);
+//                c.drawCircle(centerx, centery, circle_radius, mPaint);
                 //bottom
-                c.drawCircle(bottomLine_up_x, bottom_up_y, point_radius, mPaint);
+//                c.drawCircle(bottomLine_up_x, bottom_up_y, point_radius, mPaint);
                 c.drawCircle(bottomLine_bottom_x, bottomLine_bottom_y, point_radius, mPaint);
 
             } else if (index == mStampList.size()) {//尾
@@ -172,11 +154,14 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
                 c.drawCircle(upLine_bottom_x, upLine_bottom_y, point_radius, mPaint);
 
                 if (mStampList.get(index - 1).equals(mStampList.get(index))) {
+                    //TimeStamp not show
                     c.drawText("", Text_x, Text_y, mPaint1);
                 } else {
+                    //TimeStamp need show
                     c.drawText(mStampList.get(index), Text_x, Text_y, mPaint1);
-//                    c.drawBitmap(mIcon, centerx- 2 * circle_radius, centery- 2 * circle_radius, mPaint);
-                    c.drawCircle(centerx, centery, circle_radius, mPaint);
+                    //Node need show
+                    c.drawBitmap(mIcon, centerx - iconWidth / 2, centery - iconHeight / 2, mPaint);
+//                    c.drawCircle(centerx, centery, circle_radius, mPaint);
                 }
             } else if (mStampList.get(index - 1).equals(mStampList.get(index))) {//中间equals
                 //up
@@ -185,6 +170,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
                 //bottom
                 c.drawCircle(bottomLine_up_x, bottom_up_y, point_radius, mPaint);
                 c.drawCircle(bottomLine_bottom_x, bottomLine_bottom_y, point_radius, mPaint);
+                //TimeStamp not show
                 c.drawText("", Text_x, Text_y, mPaint1);
             } else {//中间not equals
                 //up
@@ -193,17 +179,14 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
                 //bottom
                 c.drawCircle(bottomLine_up_x, bottom_up_y, point_radius, mPaint);
                 c.drawCircle(bottomLine_bottom_x, bottomLine_bottom_y, point_radius, mPaint);
-                c.drawText(mStampList.get(index), Text_x, Text_y, mPaint1);
-//                c.drawBitmap(mIcon, centerx- 2 * circle_radius, centery- 2 * circle_radius, mPaint);
-                c.drawCircle(centerx, centery, circle_radius, mPaint);
-            }
+                //TimeStamp need show
+                c.drawText(mStampList.get(index), child.getLeft(), child.getTop() - itemView_topinterval, mPaint1);
+                //Node need show
+//                c.drawBitmap(mIcon, centerx - iconWidth / 2, centery - iconHeight / 2, mPaint);
+                c.drawBitmap(mIcon, centerx - iconWidth / 2, child.getTop() , mPaint);
 
-//            if (temp.equals(mStampList.get(i))) {
-//                c.drawText("", Text_x, Text_y, mPaint1);
-//            } else {
-//                temp = mStampList.get(i);
-//                c.drawText(mStampList.get(i), Text_x, Text_y, mPaint1);
-//            }
+//                c.drawCircle(centerx, centery, circle_radius, mPaint);
+            }
         }
     }
 

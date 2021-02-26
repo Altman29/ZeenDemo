@@ -143,7 +143,7 @@ public class TraceActivity extends AppCompatActivity {
         Rv.setHasFixedSize(true);
 
         //用自定义分割线类设置分割线
-        Rv.addItemDecoration(new DividerItemDecoration(this, mListStamp));
+        Rv.addItemDecoration(new TimeLine(this, mListStamp));
 
         //为ListView绑定适配器
         myAdapter = new MyAdapter(this, listItem);
