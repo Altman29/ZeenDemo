@@ -11,7 +11,7 @@
         android:theme="@style/Theme.ZeenDemo">
         <activity android:name=".horizontallist.HorizontalRvActivity"></activity>
         <activity android:name=".countrypicker.CountryActivity" />
-        <activity android:name=".tracerv.TraceActivity" />
+        <activity android:name=".tracerv.TimeLineActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

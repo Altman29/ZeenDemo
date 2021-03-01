@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.zeen.zeendemo.countrypicker.CountryActivity;
 import com.zeen.zeendemo.horizontallist.HorizontalRvActivity;
-import com.zeen.zeendemo.tracerv.TraceActivity;
+import com.zeen.zeendemo.tracerv.TimeLineActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void goTrace(View view) {
-        startActivity(new Intent(this, TraceActivity.class));
+        startActivity(new Intent(this, TimeLineActivity.class));
     }
 
     public void goHorizontalRv(View view) {
