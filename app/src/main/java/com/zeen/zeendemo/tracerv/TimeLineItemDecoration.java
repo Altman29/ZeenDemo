@@ -4,8 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.view.View;
 
@@ -22,13 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
  **/
 public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
 
-    private List<Integer> mStampList;
-
-    // 写右边字的画笔(具体信息)
     private Paint mPaint;
-
-    // 写左边日期字的画笔( 时间 + 日期)
-    private Paint mPaint1;
+    private Path mPath;
 
     // 左 上偏移长度
     private int itemView_leftinterval;
@@ -41,20 +37,15 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
 
     // 图标
     private Bitmap mIcon;
+    private final int mWidth;
+    private final int mHeight;
 
     public TimeLineItemDecoration(Context context, List<Integer> list) {
 
-        mStampList = list;//左侧时间list
-
-        // 轴点画笔(红色)
         mPaint = new Paint();
-        mPaint.setColor(context.getResources().getColor(R.color.red)); // 时间线颜色
-
-        // 左边时间文本画笔(蓝色)
-        // 此处设置了两只分别设置 时分 & 年月
-        mPaint1 = new Paint();
-        mPaint1.setColor(Color.BLACK);
-        mPaint1.setTextSize(30);
+        mPaint.setColor(context.getResources().getColor(R.color.trace_point)); // 时间线颜色
+        mPaint.setPathEffect(new DashPathEffect(new float[]{5, 5}, 0));
+        mPath = new Path();
 
         // 赋值ItemView的左偏移长度为200
         itemView_leftinterval = 200;
@@ -62,28 +53,23 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
         // 赋值ItemView的上偏移长度为50
         itemView_topinterval = 50;
 
-        // 赋值轴点圆的半径为10
+        // 赋值轴点圆的半径为16 虚线点5
         circle_radius = 16;
         point_radius = 5;
 
         // 获取图标资源
         mIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.logo);
+        mWidth = mIcon.getWidth();
+        mHeight = mIcon.getHeight();
     }
 
-    // 重写getItemOffsets（）方法
-    // 作用：设置ItemView 左 & 上偏移长度
+    // 设置ItemView 左 & 上偏移长度
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         // 设置ItemView的左 & 上偏移长度分别为200 px & 50px,即此为onDraw()可绘制的区域
         outRect.set(itemView_leftinterval, itemView_topinterval, 0, 0);
-
     }
-
-    // 重写onDraw（）
-    // 作用:在间隔区域里绘制时光轴线 & 时间文本
-
-    boolean firstDraw = true;
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
@@ -93,28 +79,27 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
         View first = parent.getChildAt(0);
         View last = parent.getChildAt(viewCount - 1);
 
-
-
         float centerX = itemView_leftinterval / 2;
-
-
 
         float lineY = (float) first.getTop();
 
+        //画虚线点 lineY+30(间隔)
         while (lineY <= last.getBottom()) {
-            lineY = lineY + 20;
+            lineY = lineY + 40;
+
             c.drawCircle(centerX, lineY, point_radius, mPaint);
+
         }
 
-
+        //画月份Item点
         for (int i = 0; i < viewCount; i++) {
             View child = parent.getChildAt(i);
             // 获取每个Item的位置
             int index = parent.getChildAdapterPosition(child);
             int type = parent.getAdapter().getItemViewType(index);
-            if (type == 1) {
+            if (type == 1) {//需要显示月份的item
                 float centerY = child.getTop() + (child.getHeight()) / 2;
-                c.drawCircle(centerX, centerY, circle_radius, mPaint);
+                c.drawBitmap(mIcon, centerX - mWidth / 2, centerY - mHeight / 2, mPaint);
             }
 
         }

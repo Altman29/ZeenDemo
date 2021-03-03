@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.zeen.zeendemo.countrypicker.CountryActivity;
 import com.zeen.zeendemo.horizontallist.HorizontalRvActivity;
+import com.zeen.zeendemo.ninepath.NinePathActivity;
 import com.zeen.zeendemo.tracerv.TimeLineActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,5 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void goCountryPicker(View view) {
         startActivityForResult(new Intent(this, CountryActivity.class),12);
+    }
+
+    public void goNine(View view) {
+        startActivityForResult(new Intent(this, NinePathActivity.class),12);
+
     }
 }

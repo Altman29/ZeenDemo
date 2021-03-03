@@ -42,7 +42,7 @@ public class TimeLineActivity extends AppCompatActivity {
         mListStamp = new ArrayList<>();
 
         for (int i = 0; i < 6; i++) {
-            mListStamp.add(listItem.size());//对应月份的坐标
+            mListStamp.add(listItem.size());//对应月份的坐标 数据月份需要独立获取(因为给到的数据 月份应该是create_time) 需要单独添加到List中 type为time
             listItem.add(new TimeLineBean(1,"" ,i+"月"));
             for (int j = 0; j < new Random().nextInt(3) + 2; j++) {
                 listItem.add(new TimeLineBean(2,"内容内容内容内容" + i + "-" +j,i+"月"));
@@ -65,10 +65,6 @@ public class TimeLineActivity extends AppCompatActivity {
         myAdapter = new MyAdapter(this, listItem);
         Rv.setAdapter(myAdapter);
     }
-
-
-
-
 
     static class TimeLineBean{
         public int type;
@@ -101,10 +97,10 @@ public class TimeLineActivity extends AppCompatActivity {
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             RecyclerView.ViewHolder holder;
             if (viewType == 1){
-                holder = new Viewholder1(inflater.inflate(R.layout.trace_item1, null));
+                holder = new Viewholder1(inflater.inflate(R.layout.trace_item_title, null));
 
             }else {
-                holder = new Viewholder2(inflater.inflate(R.layout.trace_item, null));
+                holder = new Viewholder2(inflater.inflate(R.layout.trace_item_content, null));
             }
             return holder;
         }//在这里把ViewHolder绑定Item的布局
@@ -113,7 +109,7 @@ public class TimeLineActivity extends AppCompatActivity {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
             if (holder instanceof Viewholder1){
                 Viewholder1 vh = (Viewholder1) holder;
-
+                //type1 即是 新月份时.使用单一月份布局
                 vh.Text.setText(listItem.get(position).time);
             }else {
                 Viewholder2 vh = (Viewholder2) holder;
