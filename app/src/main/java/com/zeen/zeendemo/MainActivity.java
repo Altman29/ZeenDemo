@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.zeen.zeendemo.countrypicker.CountryActivity;
+import com.zeen.zeendemo.fragmentVpFragment.Fvpf;
 import com.zeen.zeendemo.horizontallist.HorizontalRvActivity;
 import com.zeen.zeendemo.ninepath.NinePathActivity;
 import com.zeen.zeendemo.tracerv.TimeLineActivity;
@@ -64,11 +65,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goCountryPicker(View view) {
-        startActivityForResult(new Intent(this, CountryActivity.class),12);
+        startActivityForResult(new Intent(this, CountryActivity.class), 12);
     }
 
     public void goNine(View view) {
-        startActivityForResult(new Intent(this, NinePathActivity.class),12);
+        startActivityForResult(new Intent(this, NinePathActivity.class), 12);
+    }
 
+    public void goFVpF(View view) {
+        startActivityForResult(new Intent(this, Fvpf.class), 12);
     }
 }
