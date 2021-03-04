@@ -52,13 +52,13 @@ public class MainFragment extends Fragment {
         mVp = view.findViewById(R.id.vp_container);
         mTabLayout = view.findViewById(R.id.tabLayout);
         mTabLayout.setViewHeight(dp2px(35));
-        mTabLayout.setBottomLineWidth(dp2px(20));//indicator 宽高
-        mTabLayout.setBottomLineHeight(dp2px(6));
+        mTabLayout.setBottomLineWidth(dp2px(24));//indicator 宽高
+        mTabLayout.setBottomLineHeight(dp2px(9));
         mTabLayout.setItemInnerPaddingLeft(dp2px(6));//tab 左右padding 紧凑或铺开可超屏
         mTabLayout.setItemInnerPaddingRight(dp2px(6));
         mTabLayout.setmTextColorSelect(ContextCompat.getColor(getContext(), R.color.black));//选中时颜色
         mTabLayout.setmTextColorUnSelect(ContextCompat.getColor(getContext(), R.color.color_666666));//未选中时颜色
-        mTabLayout.setTextSize(16);
+        mTabLayout.setTextSize(24);
         mTabLayout.setBottomLineHeightBgResId(R.mipmap.smile);
         CustomFragmentPagerAdapter adapter = new CustomFragmentPagerAdapter(getFragmentManager());
         adapter.addFrag(new FirstFragment(), "冥想");
