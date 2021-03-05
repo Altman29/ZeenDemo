@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZeenDemo">
-        <activity android:name=".fragmentVpFragment.Fvpf"></activity>
+        <activity android:name=".linechartview.LineChartActivity"></activity>
+        <activity android:name=".fragmentVpFragment.Fvpf" />
         <activity android:name=".ninepath.NinePathActivity" />
         <activity android:name=".horizontallist.HorizontalRvActivity" />
         <activity android:name=".countrypicker.CountryActivity" />
