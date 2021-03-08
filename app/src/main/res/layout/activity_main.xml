@@ -64,4 +64,10 @@
         android:onClick="goLineChart"
         android:text="go LineChartView" />
 
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goLineView"
+        android:text="go NewLineView" />
 </LinearLayout>

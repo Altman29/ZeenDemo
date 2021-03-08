@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.zeen.zeendemo.countrypicker.CountryActivity;
 import com.zeen.zeendemo.fragmentVpFragment.Fvpf;
+import com.zeen.zeendemo.horizontal_lineview.NewLineActivity;
 import com.zeen.zeendemo.horizontallist.HorizontalRvActivity;
 import com.zeen.zeendemo.linechartview.LineChartActivity;
 import com.zeen.zeendemo.ninepath.NinePathActivity;
@@ -79,5 +80,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void goLineChart(View view) {
         startActivity(new Intent(this, LineChartActivity.class));
+    }
+
+    public void goLineView(View view) {
+        startActivity(new Intent(this, NewLineActivity.class));
     }
 }
