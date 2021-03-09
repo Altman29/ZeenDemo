@@ -4,16 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#FFC0CB"
     tools:context=".horizontal_lineview.NewLineActivity">
 
-    <com.zeen.zeendemo.horizontal_lineview.LineView
-        android:id="@+id/lineview"
+    <com.zeen.zeendemo.horizontal_lineview.NewLineView
+        android:id="@+id/lineview2"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
         />
 
 </RelativeLayout>

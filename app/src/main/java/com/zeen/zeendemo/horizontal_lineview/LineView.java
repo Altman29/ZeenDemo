@@ -4,17 +4,18 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.zeen.zeendemo.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,40 +30,40 @@ import androidx.annotation.Nullable;
 public class LineView extends View {
 
     public static final String TAG = "LineView";
-    private int[] mYLables = {1, 6, 11, 16, 21, 26};//Y轴数字
+    private int[] mYLables = {0, 1, 2, 3, 4};//Y轴数字
+    private float minValueY = 0;//y轴最小值
+    private float maxValueY = 4;//y轴最大值
+    private int mLableCountY = mYLables.length;//y轴刻度个数
     private List<String> xValues = new ArrayList<>();
     private List<Float> yValues = new ArrayList<>();
     private int mWidth;
     private int mHeight;
     private int originX;//原点X坐标
     private int originY;//原点Y坐标
-    private int intervalX = 130;//x轴刻度的间隔
+    private int intervalX;//x轴刻度的间隔
     private int intervalY = 80;//y轴刻度的间隔
     private int paddingTop = 140;//上下左右的padding
-    private int paddingLeft = dp2px(80);
-    private int paddingRight = dp2px(30);
-    private int paddingBottom = 150;
+    private int paddingLeft = dp2px(20);
+    private int paddingRight = dp2px(20);
+    private int paddingBottom = 160;
     private int firstPointX;//第一个点的x坐标
     private int xScaleHeight = dp2px(6);//x轴刻度线高度(可隐藏)
     private int xyTextSize = sp2px(10);//xy轴文字大小
-    private int mLableCountY = mYLables.length;//y轴刻度个数
-    private int mLeftRightExtra = intervalX / 3;//x轴左右想外延伸的长度
-    private float minValueY = 1;//y轴最小值
-    private float maxValueY = 26;//y轴最大值
-    private int bigCircleR = 7;//折线图中的圆圈
-    private int smallCircleR = 5;//折线图中为了避免折线穿透的圆圈
+
+    private int bigCircleR = 12;//折线图中的圆圈
+    private int smallCircleR = 9;//折线图中为了避免折线穿透的圆圈
     private GestureDetector mGestureDetector;//滑动手势
     private int firstMinX;//移动时第一个点的最小x值
     private int firstMaxX;//移动时第一个点的最大x值
-    private int backGroundColor = Color.parseColor("#272727");//view的背景颜色
-    private Paint mPaintWhite, mPaintBlue, mPaintRed, mPaintBack, mPaintText, mPaintDash;//画笔
+    private int backGroundColor = Color.parseColor("#FFFFFF");//view的背景颜色
+    private Paint mPaintText, mPaintDash, mPaintLine, mPaintSmallCircle;//画笔
 
     public LineView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public LineView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public LineView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -72,31 +73,24 @@ public class LineView extends View {
     }
 
     private void initPaint() {
-        mPaintWhite = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaintWhite.setColor(Color.WHITE);
-        mPaintWhite.setStyle(Paint.Style.STROKE);
 
-        mPaintBlue = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaintBlue.setColor(Color.parseColor("#0198cd"));
-        mPaintBlue.setStrokeWidth(3f);
-        mPaintBlue.setStyle(Paint.Style.STROKE);
+        mPaintSmallCircle = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaintSmallCircle.setColor(Color.WHITE);
+        mPaintSmallCircle.setStyle(Paint.Style.FILL);
 
-        mPaintBack = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaintBack.setColor(Color.parseColor("#272727"));
-        mPaintBack.setStyle(Paint.Style.FILL);
+        mPaintLine = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaintLine.setColor(Color.parseColor("#36cB99"));
+        mPaintLine.setStrokeWidth(dp2px(2));
+        mPaintLine.setStyle(Paint.Style.STROKE);
 
-        mPaintRed = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaintRed.setColor(Color.RED);
-        mPaintRed.setStrokeWidth(3f);
-        mPaintRed.setStyle(Paint.Style.STROKE);
-
+        //x轴下方文字画笔
         mPaintText = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaintText.setColor(Color.WHITE);
+        mPaintText.setColor(Color.BLACK);
         mPaintText.setTextSize(xyTextSize);
         mPaintText.setStrokeWidth(2f);
-
+        //虚线画笔
         mPaintDash = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaintDash.setColor(Color.WHITE);
+        mPaintDash.setColor(Color.parseColor("#778899"));
         mPaintDash.setStyle(Paint.Style.STROKE);
         mPaintDash.setStrokeWidth(1f);
     }
@@ -106,131 +100,73 @@ public class LineView extends View {
         if (changed) {
             mWidth = getWidth();
             mHeight = getHeight();
-
-            originX = paddingLeft - mLeftRightExtra;
+            intervalX = mWidth / 6;
+            System.out.println("mHeight: " + mHeight);//根据ui设计暂定220dp
+            originX = 0;
             originY = mHeight - paddingBottom;
 
-            firstPointX = paddingLeft;
-            firstMinX = mWidth - originX - (xValues.size() - 1) * intervalX - mLeftRightExtra;
+            firstPointX = 0;
+            firstMinX = mWidth - originX - (xValues.size() - 1) * intervalX;
 
             //滑动时，第一个点x值最大为paddingLeft，在大于这个值就不能滑动了
             firstMaxX = firstPointX;
             setBackgroundColor(backGroundColor);
+            setBackground(getResources().getDrawable(R.drawable.lineview));
         }
         super.onLayout(changed, left, top, right, bottom);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //drawLine和drawY位置不能改变
         drawX(canvas);
         drawLine(canvas);
-        drawY(canvas);
     }
 
-    public void setXValues(List<String> values) {
-        this.xValues = values;
-    }
-
-    public void setYValues(List<Float> values) {
-        this.yValues = values;
-        for (int i = 0; i < yValues.size(); i++) {
-            // 找出y轴的最大最小值
-            if (yValues.get(i) > maxValueY) {
-                maxValueY = yValues.get(i);
-            }
-            if (yValues.get(i) < minValueY) {
-                minValueY = yValues.get(i);
-            }
+    public void setData(ArrayList<ViewPoint> pointList) {
+        for (ViewPoint viewPoint : pointList) {
+            xValues.add(viewPoint.x);
+            yValues.add(viewPoint.y);
         }
-    }
-
-    private void drawY(Canvas canvas) {
-        Path path = new Path();
-        path.moveTo(originX, originY);
-
-        for (int i = 0; i < mLableCountY; i++) {
-            // y轴线
-            path.lineTo(originX, mHeight - paddingBottom - mLeftRightExtra - i * intervalY);
-        }
-
-        //y轴最后一个刻度的位置
-        int lastPointY = mHeight - paddingBottom - mLeftRightExtra - (mLableCountY - 1) * intervalY;
-        // 箭头位置，y轴最后一个点后，需要额外加上一小段，就是一个半leftRightExtra的长度
-        int lastY = lastPointY - mLeftRightExtra - mLeftRightExtra / 2;
-        // y轴箭头
-        canvas.drawLine(originX, lastPointY, originX, lastY, mPaintWhite);
-        canvas.drawLine(originX, lastY, originX - 10, lastY + 15, mPaintWhite);
-        canvas.drawLine(originX, lastY, originX + 10, lastY + 15, mPaintWhite);
-
-        canvas.drawPath(path, mPaintWhite);
-
-        // y轴文字
-        for (int i = 0; i < mYLables.length; i++) {
-            canvas.drawText(String.valueOf(mYLables[i]), originX - dp2px(25),
-                    mHeight - paddingBottom - mLeftRightExtra - i * intervalY + getTextHeight(mPaintText, "00.00") / 2, mPaintText);
-        }
-
-        // 截取折线超出部分（右边）
-        mPaintBack.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
-        RectF rectF = new RectF(mWidth - paddingRight, 0, mWidth, mHeight);
-        canvas.drawRect(rectF, mPaintBack);
     }
 
     private void drawLine(Canvas canvas) {
         // 画折线
         float aver = (mLableCountY - 1) * intervalY / (maxValueY - minValueY); //y轴最小单位的距离
+//        float aver = 1; //y轴最小单位的距离
         Path path = new Path();
         //先移动到第一个点的位置
-        path.moveTo(firstPointX, mHeight - paddingBottom - mLeftRightExtra - yValues.get(0) * aver + minValueY * aver);
+        path.moveTo(firstPointX, mHeight - paddingBottom - yValues.get(0) * aver + minValueY * aver);
         //绘制折线
         for (int i = 0; i < yValues.size(); i++) {
-            path.lineTo(firstPointX + i * intervalX, mHeight - paddingBottom - mLeftRightExtra - yValues.get(i) * aver + minValueY * aver);
+            path.lineTo(firstPointX + i * intervalX, mHeight - paddingBottom - yValues.get(i) * aver + minValueY * aver);
         }
-        canvas.drawPath(path, mPaintBlue);
+        canvas.drawPath(path, mPaintLine);
 
         // 折线中的圆点
         for (int i = 0; i < yValues.size(); i++) {
             canvas.drawCircle(firstPointX + i * intervalX,
-                    mHeight - paddingBottom - mLeftRightExtra - yValues.get(i) * aver + minValueY * aver, bigCircleR, mPaintBlue);
+                    mHeight - paddingBottom - yValues.get(i) * aver + minValueY * aver, bigCircleR, mPaintLine);
             //小圆的颜色和view背景颜色相同，这样看上去折线是没有穿透圆的
             canvas.drawCircle(firstPointX + i * intervalX,
-                    mHeight - paddingBottom - mLeftRightExtra - yValues.get(i) * aver + minValueY * aver, smallCircleR, mPaintBack);
+                    mHeight - paddingBottom - yValues.get(i) * aver + minValueY * aver, smallCircleR, mPaintSmallCircle);
         }
-
-        //将折线超出x轴坐标的部分截取掉（左边）
-        mPaintBack.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
-        RectF rectF = new RectF(0, 0, originX, mHeight);
-        canvas.drawRect(rectF, mPaintBack);
     }
 
     private void drawX(Canvas canvas) {
-        Path path = new Path();
-        path.moveTo(originX, originY);
-        // x轴线
-        path.lineTo(mWidth - paddingRight, originY);
-        canvas.drawPath(path, mPaintWhite);
-
-        // x轴箭头
-        canvas.drawLine(mWidth - paddingRight, originY, mWidth - paddingRight - 15, originY + 10, mPaintWhite);
-        canvas.drawLine(mWidth - paddingRight, originY, mWidth - paddingRight - 15, originY - 10, mPaintWhite);
 
         for (int i = 0; i < xValues.size(); i++) {
-            // x轴线上的刻度线
-            canvas.drawLine(firstPointX + i * intervalX, originY, firstPointX + i * intervalX, originY - xScaleHeight, mPaintWhite);
             // x轴上的文字
-            canvas.drawText(xValues.get(i), firstPointX + i * intervalX - getTextWidth(mPaintText, "17.01") / 2,
+            canvas.drawText(xValues.get(i), firstPointX + i * intervalX - getTextWidth(mPaintText, "23") / 2,
                     originY + dp2px(20), mPaintText);
         }
 
-
-        // x轴虚线
+        //虚线
         Path path1 = new Path();
         DashPathEffect dash = new DashPathEffect(new float[]{8, 10, 8, 10}, 0);
         mPaintDash.setPathEffect(dash);
         for (int i = 0; i < mLableCountY; i++) {
-            path1.moveTo(originX, mHeight - paddingBottom - mLeftRightExtra - i * intervalY);
-            path1.lineTo(mWidth - paddingRight, mHeight - paddingBottom - mLeftRightExtra - i * intervalY);
+            path1.moveTo(originX, mHeight - paddingBottom - i * intervalY);
+            path1.lineTo(mWidth, mHeight - paddingBottom - i * intervalY);
         }
         canvas.drawPath(path1, mPaintDash);
     }
@@ -263,9 +199,9 @@ public class LineView extends View {
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             // e1：第1个ACTION_DOWN MotionEvent
             // e2：最后一个ACTION_MOVE MotionEvent
-
             Log.i(TAG, "onScroll: ");
-            if (e1.getX() > originX && e1.getX() < mWidth - paddingRight &&
+//            if (e1.getX() > originX && e1.getX() < mWidth - paddingRight &&
+            if (e1.getX() > originX && e1.getX() < mWidth &&
                     e1.getY() > paddingTop && e1.getY() < mHeight - paddingBottom) {
                 //注意：这里的distanceX是e1.getX()-e2.getX()
                 Log.i(TAG, "onScroll distanceX : " + distanceX);
@@ -304,6 +240,11 @@ public class LineView extends View {
         }
         mGestureDetector.onTouchEvent(event);
         return true;
+    }
+
+    private Shader getShader() {
+        int[] shadeColors = {Color.argb(1, 83, 210, 168), Color.argb(1, 54, 203, 153)};
+        return new LinearGradient((getMeasuredWidth() / 2), getMeasuredHeight(), (getMeasuredWidth() / 2), 0f, shadeColors, null, Shader.TileMode.CLAMP);
     }
 
     /**
