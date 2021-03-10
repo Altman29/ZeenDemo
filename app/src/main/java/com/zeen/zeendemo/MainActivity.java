@@ -12,6 +12,7 @@ import com.zeen.zeendemo.horizontal_lineview.NewLineActivity;
 import com.zeen.zeendemo.horizontallist.HorizontalRvActivity;
 import com.zeen.zeendemo.linechartview.LineChartActivity;
 import com.zeen.zeendemo.ninepath.NinePathActivity;
+import com.zeen.zeendemo.pieview.PieChartActivity;
 import com.zeen.zeendemo.tracerv.TimeLineActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,5 +85,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void goLineView(View view) {
         startActivity(new Intent(this, NewLineActivity.class));
+    }
+
+    public void goRingView(View view) {
+        startActivity(new Intent(this, PieChartActivity.class));
     }
 }

@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZeenDemo">
+        <activity android:name=".pieview.PieChartActivity"></activity>
         <activity android:name=".horizontal_lineview.NewLineActivity" />
         <activity android:name=".linechartview.LineChartActivity" />
         <activity android:name=".fragmentVpFragment.Fvpf" />
