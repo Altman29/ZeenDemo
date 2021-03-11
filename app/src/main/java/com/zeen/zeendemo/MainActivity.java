@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.zeen.zeendemo.answer_views.AnswerViewsActivity;
 import com.zeen.zeendemo.countrypicker.CountryActivity;
 import com.zeen.zeendemo.fragmentVpFragment.Fvpf;
 import com.zeen.zeendemo.horizontal_lineview.NewLineActivity;
@@ -89,5 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void goRingView(View view) {
         startActivity(new Intent(this, PieChartActivity.class));
+    }
+
+    public void goQAViews(View view) {
+        startActivity(new Intent(this, AnswerViewsActivity.class));
     }
 }

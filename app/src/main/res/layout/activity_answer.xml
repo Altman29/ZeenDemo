@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".answer_views.AnswerViewsActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="submit"
+        android:text="Submit"
+        android:textColor="#fff"
+        android:textSize="16sp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F5F6F8">
+
+        <com.zeen.zeendemo.answer_views.widget.QA_SeekBar
+            android:id="@+id/qa_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:maxHeight="10dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/seekbar_style"
+            android:splitTrack="false"
+            android:thumb="@drawable/thumb"
+            app:img="@mipmap/seektext"
+            app:textColor="#000"
+            app:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="38dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="28dp"
+                android:paddingTop="12dp"
+                android:paddingRight="28dp"
+                android:paddingBottom="12dp"
+                android:text="商家"
+                android:textColor="@color/radio_text_color"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="28dp"
+                android:paddingTop="12dp"
+                android:paddingRight="28dp"
+                android:paddingBottom="12dp"
+                android:text="顾客"
+                android:textColor="@color/radio_text_color"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="28dp"
+                android:paddingTop="12dp"
+                android:paddingRight="28dp"
+                android:paddingBottom="12dp"
+                android:text="交警"
+                android:textColor="@color/radio_text_color"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="28dp"
+                android:paddingTop="12dp"
+                android:paddingRight="28dp"
+                android:paddingBottom="12dp"
+                android:text="门卫"
+                android:textColor="@color/radio_text_color"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="28dp"
+                android:paddingTop="12dp"
+                android:paddingRight="28dp"
+                android:paddingBottom="12dp"
+                android:text="陌生人"
+                android:textColor="@color/radio_text_color"
+                android:textSize="16sp" />
+
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+</LinearLayout>
