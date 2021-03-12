@@ -1,16 +1,18 @@
-package com.zeen.zeendemo.answer_views.single;
+package com.zeen.zeendemo.answer_views.multiple;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zeen.zeendemo.R;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,33 +22,32 @@ import androidx.recyclerview.widget.RecyclerView;
  * e-mail:altman29@foxmail.com
  * Desc:
  */
-public class SingleChoiceAdapter extends RecyclerView.Adapter<SingleChoiceAdapter.SingleVH> {
+public class MultipleChoiceAdapter extends RecyclerView.Adapter<MultipleChoiceAdapter.MultipleVH> {
 
     private List<String> values;
     private onItemClickListener mOnItemClickListener;
-    private int defItem = -1;//默认值
+    private Set<Integer> defItems = new HashSet<>();
     private Context mContext;
-    private SingleVH mSingleVH;
 
-    public SingleChoiceAdapter(Context ctx, List<String> values) {
+    public MultipleChoiceAdapter(Context ctx, List<String> values) {
         this.values = values;
         mContext = ctx;
     }
 
     @NonNull
     @Override
-    public SingleVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.single_item, parent, false);
-        mSingleVH = new SingleVH(itemView);
-        return mSingleVH;
+    public MultipleVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.multiple_item, parent, false);
+        MultipleVH holder = new MultipleVH(itemView);
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SingleVH holder, int position) {
+    public void onBindViewHolder(@NonNull MultipleVH holder, int position) {
         holder.mTv.setText(values.get(position));
-        if (defItem != -1) {
+        if (defItems != null) {
             /*点的位置跟点击的textview位置一样设置点击后的不同样式*/
-            if (defItem == position) {/*设置选中的样式*/
+            if (defItems.contains(position)) {/*设置选中的样式*/
                 holder.mTv.setBackground(mContext.getResources().getDrawable(R.drawable.radio_selected));
                 holder.mTv.setTextColor(Color.parseColor("#36CB99"));
             } else {
@@ -66,23 +67,27 @@ public class SingleChoiceAdapter extends RecyclerView.Adapter<SingleChoiceAdapte
     }
 
     /**
-     * 获取当前点击位置
+     * 获取当前点击位置Set
      * onclick 点击后刷新background & textColor
-     *
      * @param position
      */
-    public void setDefSelect(int position) {
-        this.defItem = position;
+    public void setDefSelectSet(int position) {
+        if (defItems.contains(position))
+            defItems.remove(position);
+        else
+            this.defItems.add(position);
         notifyDataSetChanged();
     }
 
-    public void reset() {
-        defItem = values.size()+1;
-        notifyDataSetChanged();
-    }
+    public List<String> getSelectedValues() {
 
-    public int getItemWidth(){
-        return mSingleVH.itemView.getWidth();
+        List<String> result = new ArrayList<>();
+
+        for (int i : defItems) {
+            result.add(values.get(i));
+        }
+
+        return null == result ? null : result;
     }
 
     public interface onItemClickListener {
@@ -93,14 +98,12 @@ public class SingleChoiceAdapter extends RecyclerView.Adapter<SingleChoiceAdapte
         mOnItemClickListener = onItemClickListener;
     }
 
-    class SingleVH extends RecyclerView.ViewHolder {
+    class MultipleVH extends RecyclerView.ViewHolder {
         private TextView mTv;
-        private RelativeLayout mRl;
 
-        public SingleVH(@NonNull View itemView) {
+        public MultipleVH(@NonNull View itemView) {
             super(itemView);
             mTv = itemView.findViewById(R.id.item_tv);
-            mRl = itemView.findViewById(R.id.rl);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
