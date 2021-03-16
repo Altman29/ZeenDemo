@@ -12,12 +12,16 @@ import com.zeen.zeendemo.ToastUtils;
 import com.zeen.zeendemo.answer_views.derocation.GridSpaceDecoration;
 import com.zeen.zeendemo.answer_views.multiple.MultipleChoiceAdapter;
 import com.zeen.zeendemo.answer_views.single.SingleChoiceAdapter;
+import com.zeen.zeendemo.answer_views.task.SpacesItemDecoration;
+import com.zeen.zeendemo.answer_views.task.TaskAdapter;
+import com.zeen.zeendemo.answer_views.task.TaskEntity;
 import com.zeen.zeendemo.answer_views.widget.QA_SeekBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /*
@@ -28,8 +32,10 @@ public class AnswerViewsActivity extends AppCompatActivity {
     private QA_SeekBar mSeekBar;
     private RecyclerView mSingleRv;
     private RecyclerView mMultipleRv;
+    private RecyclerView mTaskRv;
     private List<String> values;
     private List<String> values2;
+    private List<TaskEntity> mTaskEntities;
     private MultipleChoiceAdapter mMultipleChoiceAdapter;
     private SingleChoiceAdapter mSingleChoiceAdapter;
 
@@ -42,7 +48,33 @@ public class AnswerViewsActivity extends AppCompatActivity {
         initData();
         initSingleRv();
         initMultipleRv();
+        initTaskRv();
 
+    }
+
+    private void initTaskRv() {
+        mTaskEntities = new ArrayList<>();
+        mTaskEntities.add(new TaskEntity("自责", "当事情出现一些不好的方面时，会认为是自己的错误导致了结果的发生"));
+        mTaskEntities.add(new TaskEntity("贴标签", "给自己或他人下定论、作评价，这些评价和标签往往是草率的、片面的、消极的"));
+        mTaskEntities.add(new TaskEntity("自责", "当事情出现一些不好的方面时，会认为是自己的错误导致了结果的发生"));
+        mTaskEntities.add(new TaskEntity("贴标签", "给自己或他人下定论、作评价，这些评价和标签往往是草率的、片面的、消极的"));
+        TaskAdapter taskAdapter = new TaskAdapter(mTaskEntities);
+        taskAdapter.setOnItemClickListener(new TaskAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                ToastUtils.showToastShort(v.getContext(), mTaskEntities.get(pos).title);
+            }
+        });
+//        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this,FlexDirection.ROW,FlexWrap.NOWRAP);
+//        layoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
+//        mTaskRv.setLayoutManager(layoutManager);
+//        mTaskRv.setAdapter(taskAdapter);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(RecyclerView.HORIZONTAL);
+        mTaskRv.setLayoutManager(manager);
+        int space = 20;
+        mTaskRv.addItemDecoration(new SpacesItemDecoration(space));
+        mTaskRv.setAdapter(taskAdapter);
     }
 
     private void initData() {
@@ -121,7 +153,7 @@ public class AnswerViewsActivity extends AppCompatActivity {
         });
         //LayoutManager
 //        mMultipleRv.setLayoutManager(new GridLayoutManager(this, 3));
-        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this,FlexDirection.ROW,FlexWrap.WRAP);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this, FlexDirection.ROW, FlexWrap.WRAP);
         layoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
         mMultipleRv.setLayoutManager(layoutManager);
         mMultipleRv.setAdapter(mMultipleChoiceAdapter);
@@ -131,6 +163,7 @@ public class AnswerViewsActivity extends AppCompatActivity {
         mSeekBar = findViewById(R.id.qa_seekbar);
         mSingleRv = findViewById(R.id.singleRv);
         mMultipleRv = findViewById(R.id.multipleRv);
+        mTaskRv = findViewById(R.id.taskRv);
 
     }
 
