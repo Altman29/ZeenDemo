@@ -192,7 +192,6 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/taskRv"
             android:overScrollMode="never"
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </RelativeLayout>

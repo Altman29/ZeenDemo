@@ -73,7 +73,7 @@ public class AnswerViewsActivity extends AppCompatActivity {
         manager.setOrientation(RecyclerView.HORIZONTAL);
         mTaskRv.setLayoutManager(manager);
         int space = 20;
-        mTaskRv.addItemDecoration(new SpacesItemDecoration(space));
+        mTaskRv.addItemDecoration(new SpacesItemDecoration(space,mTaskEntities.size()));
         mTaskRv.setAdapter(taskAdapter);
     }
 
