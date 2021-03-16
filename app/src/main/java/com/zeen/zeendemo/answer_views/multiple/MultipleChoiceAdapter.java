@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.flexbox.FlexboxLayoutManager;
 import com.zeen.zeendemo.R;
 
 import java.util.ArrayList;
@@ -45,6 +46,11 @@ public class MultipleChoiceAdapter extends RecyclerView.Adapter<MultipleChoiceAd
     @Override
     public void onBindViewHolder(@NonNull MultipleVH holder, int position) {
         holder.mTv.setText(values.get(position));
+        ViewGroup.LayoutParams layoutParams = holder.mTv.getLayoutParams();
+        if (layoutParams instanceof FlexboxLayoutManager.LayoutParams) {
+            FlexboxLayoutManager.LayoutParams flexboxLp = (FlexboxLayoutManager.LayoutParams) holder.mTv.getLayoutParams();
+            flexboxLp.setFlexGrow(1.0f);
+        }
         if (defItems != null) {
             /*点的位置跟点击的textview位置一样设置点击后的不同样式*/
             if (defItems.contains(position)) {/*设置选中的样式*/
@@ -69,6 +75,7 @@ public class MultipleChoiceAdapter extends RecyclerView.Adapter<MultipleChoiceAd
     /**
      * 获取当前点击位置Set
      * onclick 点击后刷新background & textColor
+     *
      * @param position
      */
     public void setDefSelectSet(int position) {

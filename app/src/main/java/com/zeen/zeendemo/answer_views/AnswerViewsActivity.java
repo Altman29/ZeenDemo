@@ -3,6 +3,10 @@ package com.zeen.zeendemo.answer_views;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.zeen.zeendemo.R;
 import com.zeen.zeendemo.ToastUtils;
 import com.zeen.zeendemo.answer_views.derocation.GridSpaceDecoration;
@@ -14,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /*
@@ -26,6 +29,7 @@ public class AnswerViewsActivity extends AppCompatActivity {
     private RecyclerView mSingleRv;
     private RecyclerView mMultipleRv;
     private List<String> values;
+    private List<String> values2;
     private MultipleChoiceAdapter mMultipleChoiceAdapter;
     private SingleChoiceAdapter mSingleChoiceAdapter;
 
@@ -56,22 +60,30 @@ public class AnswerViewsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View v, int pos) {
                 mSingleChoiceAdapter.setDefSelect(pos);
-                ToastUtils.showToastShort(v.getContext(), values.get(pos));
+//                ToastUtils.showToastShort(v.getContext(), values.get(pos));
+                View viewByPosition = mSingleRv.getLayoutManager().findViewByPosition(pos);
+                ToastUtils.showToastShort(v.getContext(), "width: " + viewByPosition.getWidth() + " height: " + viewByPosition.getHeight());
             }
         });
-        mSingleRv.setLayoutManager(new GridLayoutManager(this, 3));
+        //LayoutManager
+//        mSingleRv.setLayoutManager(new GridLayoutManager(this, 3));
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
+        layoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
+        mSingleRv.setLayoutManager(layoutManager);
         mSingleRv.setAdapter(mSingleChoiceAdapter);
-        initDecorationPara();
+//        initDecorationPara();
+
 
     }
 
     private void initDecorationPara() {
         //一行需要显示4个item
-        int count = values.size();
+        int count = 3;
         //recyclerView的宽度
         int rvWidth = mSingleRv.getWidth();
         //每个item的宽度
-//        int itemWidth = mSingleChoiceAdapter.getItemWidth();
         int itemWidth = 200;
         //计算间距
         int space = (rvWidth - count * itemWidth) / (count - 1);
@@ -80,30 +92,38 @@ public class AnswerViewsActivity extends AppCompatActivity {
 
 
     private void initMultipleRv() {
-        values = new ArrayList<>();
-        values.add("愤怒");
-        values.add("悲伤");
-        values.add("厌烦");
-        values.add("无奈");
-        values.add("愧疚");
-        values.add("不安");
-        values.add("无助");
-        values.add("绝望");
-        values.add("尴尬");
-        values.add("愤怒");
-        values.add("悲伤");
-        values.add("厌烦");
-        values.add("垂头丧气");
-        values.add("垂头丧气");
-        mMultipleChoiceAdapter = new MultipleChoiceAdapter(this, values);
+        values2 = new ArrayList<>();
+        values2.add("愤怒");
+        values2.add("悲伤");
+        values2.add("厌烦");
+        values2.add("无奈");
+        values2.add("愧疚");
+        values2.add("不安");
+        values2.add("无助");
+        values2.add("绝望");
+        values2.add("尴尬");
+        values2.add("愤怒");
+        values2.add("悲伤");
+        values2.add("厌烦");
+        values2.add("垂头丧气");
+        values2.add("金桔柠檬");
+        mMultipleChoiceAdapter = new MultipleChoiceAdapter(this, values2);
         mMultipleChoiceAdapter.setOnItemClickListener(new MultipleChoiceAdapter.onItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
                 mMultipleChoiceAdapter.setDefSelectSet(pos);
-                ToastUtils.showToastShort(v.getContext(), values.get(pos));
+//                ToastUtils.showToastShort(v.getContext(), values2.get(pos));
+
+                View viewByPosition = mMultipleRv.getLayoutManager().findViewByPosition(pos);
+                ToastUtils.showToastShort(v.getContext(), "width: " + viewByPosition.getWidth() + " height: " + viewByPosition.getHeight());
+
             }
         });
-        mMultipleRv.setLayoutManager(new GridLayoutManager(this, 3));
+        //LayoutManager
+//        mMultipleRv.setLayoutManager(new GridLayoutManager(this, 3));
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this,FlexDirection.ROW,FlexWrap.WRAP);
+        layoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
+        mMultipleRv.setLayoutManager(layoutManager);
         mMultipleRv.setAdapter(mMultipleChoiceAdapter);
     }
 

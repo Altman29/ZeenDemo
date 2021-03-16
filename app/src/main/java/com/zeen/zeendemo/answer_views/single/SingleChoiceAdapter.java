@@ -81,10 +81,6 @@ public class SingleChoiceAdapter extends RecyclerView.Adapter<SingleChoiceAdapte
         notifyDataSetChanged();
     }
 
-    public int getItemWidth(){
-        return mSingleVH.itemView.getWidth();
-    }
-
     public interface onItemClickListener {
         void onItemClick(View v, int pos);
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_marginTop="20dp"
     android:layout_gravity="center"
     android:layout_height="wrap_content">
@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/radio_selector"
         android:layout_centerInParent="true"
-        android:paddingLeft="28dp"
+        android:paddingLeft="34dp"
         android:paddingTop="12dp"
-        android:paddingRight="28dp"
+        android:paddingRight="34dp"
         android:paddingBottom="12dp"
         android:text="商家"
         android:textColor="@color/radio_text_color"
