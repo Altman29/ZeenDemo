@@ -165,6 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:text="(Part1:172-167)"
             />
 
@@ -178,6 +179,7 @@
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:text="(Part2:166-165)"
             />
@@ -191,6 +193,7 @@
             android:id="@+id/tv_z"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="(Part3:164-163)"
@@ -204,6 +207,7 @@
         <TextView
             android:id="@+id/tv_r"
             android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -221,6 +225,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="calc"
+        android:id="@+id/bt_result"
         android:onClick="getResult"
         />
 
@@ -230,6 +235,7 @@
         android:layout_height="wrap_content"
         android:textSize="36sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:visibility="gone"
         />
 
@@ -239,6 +245,7 @@
         android:layout_height="wrap_content"
         android:textSize="36sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:visibility="gone"
         />
 
@@ -247,6 +254,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="36sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:visibility="gone"
         />
@@ -256,6 +264,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="36sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:visibility="gone"
         />

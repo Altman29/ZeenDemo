@@ -1,12 +1,11 @@
 package com.zeen.zeendemo.answer_views.dots;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
-
-import com.zeen.zeendemo.R;
 
 import androidx.annotation.Nullable;
 
@@ -15,46 +14,62 @@ import androidx.annotation.Nullable;
  * e-mail:altman29@foxmail.com
  * Desc: Timer.
  */
-public class DotsView extends LinearLayout {
+public class DotsView extends View {
 
-    private View mDot1;
-    private View mDot2;
-    private View mDot3;
+    private final int COUNT = 3;
+    private Paint mPaint1;
+    private Paint mPaint2;
+    private int current;
 
     public DotsView(Context context) {
-        this(context, null);
+        super(context);
+        init(context);
     }
 
     public DotsView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
-        View view = LayoutInflater.from(context).inflate(R.layout.dots_view, this);
-        mDot1 = view.findViewById(R.id.dot_1);
-        mDot2 = view.findViewById(R.id.dot_2);
-        mDot3 = view.findViewById(R.id.dot_3);
-        startLoadAnim();
+        super(context, attrs);
+        init(context);
     }
 
     public DotsView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context);
     }
 
-    private void startLoadAnim() {
-        for (int i = 0; i < 3; i++) {
-            mDot1.setBackground(getResources().getDrawable(R.drawable.login_dot_focused));
-            mDot2.setBackground(getResources().getDrawable(R.drawable.login_dot_normal));
-            mDot3.setBackground(getResources().getDrawable(R.drawable.login_dot_normal));
+    private void init(Context context) {
+        mPaint1 = new Paint();
+        mPaint1.setColor(Color.parseColor("#36CB99"));
+        mPaint2 = new Paint();
+        mPaint2.setColor(Color.parseColor("#D1DADF"));
+    }
 
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        int width = getWidth();
+        int height = getHeight();
+
+        int space = width / (COUNT + 1);
+
+        for (int i = 0; i < COUNT; i++) {
+            canvas.drawCircle(space * (i + 1.2f), height / 2, Math.min(width, height) / 8, i == current ? mPaint1 : mPaint2);
         }
 
-        mDot1.setBackground(getResources().getDrawable(R.drawable.login_dot_focused));
-        mDot1.setBackground(getResources().getDrawable(R.drawable.login_dot_normal));
-
-        mDot2.setBackground(getResources().getDrawable(R.drawable.login_dot_focused));
-        mDot2.setBackground(getResources().getDrawable(R.drawable.login_dot_normal));
-
-        mDot3.setBackground(getResources().getDrawable(R.drawable.login_dot_focused));
-        mDot3.setBackground(getResources().getDrawable(R.drawable.login_dot_normal));
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                current = (++current) % COUNT;
+                invalidate();
+            }
+        }, 200);
 
     }
 
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+
+    }
 }

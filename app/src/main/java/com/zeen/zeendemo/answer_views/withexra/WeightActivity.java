@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -50,6 +51,7 @@ public class WeightActivity extends AppCompatActivity {
     private TextView mResult2;
     private TextView mResult3;
     private TextView mResult4;
+    private Button mBtResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +203,8 @@ public class WeightActivity extends AppCompatActivity {
         mEt3.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
         mEt4.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
 
+        mBtResult = findViewById(R.id.bt_result);
+
         mRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -226,7 +230,9 @@ public class WeightActivity extends AppCompatActivity {
     }
 
     public void getResult(View view) {
-
+        if (mEt1.getText().toString()==""||mEt2.getText().toString()==""||mEt3.getText().toString()==""||mEt4.getText().toString()==""){
+            return;
+        }
         int x = Integer.parseInt(mEt1.getText().toString());
         int y = Integer.parseInt(mEt2.getText().toString());
         int z = Integer.parseInt(mEt3.getText().toString());
