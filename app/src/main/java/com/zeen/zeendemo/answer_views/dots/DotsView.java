@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 /**
  * Created by Clark Chen. on 3/16/21.
  * e-mail:altman29@foxmail.com
- * Desc:
+ * Desc: Timer.
  */
 public class DotsView extends LinearLayout {
 

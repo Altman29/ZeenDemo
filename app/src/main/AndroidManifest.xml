@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZeenDemo">
-        <activity android:name=".answer_views.AnswerViewsActivity"></activity>
+        <activity android:name=".answer_views.withexra.WeightActivity"></activity>
+        <activity android:name=".answer_views.AnswerViewsActivity" />
         <activity android:name=".pieview.PieChartActivity" />
         <activity android:name=".horizontal_lineview.NewLineActivity" />
         <activity android:name=".linechartview.LineChartActivity" />
