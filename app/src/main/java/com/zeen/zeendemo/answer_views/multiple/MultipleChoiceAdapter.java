@@ -86,6 +86,11 @@ public class MultipleChoiceAdapter extends RecyclerView.Adapter<MultipleChoiceAd
         notifyDataSetChanged();
     }
 
+    public void clearDef(){
+        defItems.clear();
+        notifyDataSetChanged();
+    }
+
     public List<String> getSelectedValues() {
 
         List<String> result = new ArrayList<>();

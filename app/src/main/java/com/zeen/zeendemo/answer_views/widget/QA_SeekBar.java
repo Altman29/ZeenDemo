@@ -65,6 +65,9 @@ public class QA_SeekBar extends AppCompatSeekBar {
      * 文字的方位
      */
     private int textAlign;
+    private int mScale;
+    private int mBeginInt;
+    private int mEndInt;
 
     public QA_SeekBar(Context context) {
         this(context, null);
@@ -134,9 +137,15 @@ public class QA_SeekBar extends AppCompatSeekBar {
         float text_x = rect_seek.width() * getProgress() / getMax() + (img_width - numTextWidth) / 2;
         canvas.drawBitmap(map, bm_x, bm_y, paint);//画背景图
         canvas.drawText(mTitleText, text_x, (float) (textBaselineY + bm_y - 10), paint);//画文字
+
+        //画俩个最值
+        int width = getWidth();
+        int height = getHeight();
+        canvas.drawText(mBeginInt + "", rect_seek.width() * 9 / getMax(), height, paint);
+        canvas.drawText(mEndInt + "", rect_seek.width(), height, paint);
     }
 
-    public String getTitleText(){
+    public String getTitleText() {
         return mTitleText;
     }
 
@@ -153,7 +162,7 @@ public class QA_SeekBar extends AppCompatSeekBar {
 
         fm = paint.getFontMetrics();
         //文本的宽度
-        mTitleText = getProgress() + "";
+        mTitleText = getProgress() / mScale + "";
 
         numTextWidth = paint.measureText(mTitleText);
 
@@ -195,6 +204,18 @@ public class QA_SeekBar extends AppCompatSeekBar {
                 textCenterX = img_width - numTextWidth / 2;
                 textBaselineY = img_height - fm.bottom;
                 break;
+        }
+    }
+
+    public void setRange(int begin, int end) {
+        mBeginInt = begin;
+        mEndInt = end;
+        if (end == 100) {
+            mScale = 1;
+        } else if (end == 10) {
+            mScale = 10;
+        } else {
+            mScale = 1;
         }
     }
 }

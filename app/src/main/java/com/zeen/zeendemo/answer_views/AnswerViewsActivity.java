@@ -73,7 +73,7 @@ public class AnswerViewsActivity extends AppCompatActivity {
         manager.setOrientation(RecyclerView.HORIZONTAL);
         mTaskRv.setLayoutManager(manager);
         int space = 20;
-        mTaskRv.addItemDecoration(new SpacesItemDecoration(space,mTaskEntities.size()));
+        mTaskRv.addItemDecoration(new SpacesItemDecoration(space, mTaskEntities.size()));
         mTaskRv.setAdapter(taskAdapter);
     }
 
@@ -139,15 +139,21 @@ public class AnswerViewsActivity extends AppCompatActivity {
         values2.add("厌烦");
         values2.add("垂头丧气");
         values2.add("金桔柠檬");
+        values2.add("以上都没有");
         mMultipleChoiceAdapter = new MultipleChoiceAdapter(this, values2);
         mMultipleChoiceAdapter.setOnItemClickListener(new MultipleChoiceAdapter.onItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
                 mMultipleChoiceAdapter.setDefSelectSet(pos);
-//                ToastUtils.showToastShort(v.getContext(), values2.get(pos));
 
-                View viewByPosition = mMultipleRv.getLayoutManager().findViewByPosition(pos);
-                ToastUtils.showToastShort(v.getContext(), "width: " + viewByPosition.getWidth() + " height: " + viewByPosition.getHeight());
+                int index = values2.indexOf("以上都没有");
+                if (pos == index) {
+                    ToastUtils.showToastShort(AnswerViewsActivity.this, "clear and index= " + index);
+                    mMultipleChoiceAdapter.clearDef();
+                }
+
+//                View viewByPosition = mMultipleRv.getLayoutManager().findViewByPosition(pos);
+//                ToastUtils.showToastShort(v.getContext(), "width: " + viewByPosition.getWidth() + " height: " + viewByPosition.getHeight());
 
             }
         });
@@ -161,6 +167,7 @@ public class AnswerViewsActivity extends AppCompatActivity {
 
     private void initView() {
         mSeekBar = findViewById(R.id.qa_seekbar);
+        mSeekBar.setRange(0, 10);
         mSingleRv = findViewById(R.id.singleRv);
         mMultipleRv = findViewById(R.id.multipleRv);
         mTaskRv = findViewById(R.id.taskRv);

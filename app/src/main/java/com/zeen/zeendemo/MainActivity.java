@@ -15,6 +15,7 @@ import com.zeen.zeendemo.horizontallist.HorizontalRvActivity;
 import com.zeen.zeendemo.linechartview.LineChartActivity;
 import com.zeen.zeendemo.ninepath.NinePathActivity;
 import com.zeen.zeendemo.pieview.PieChartActivity;
+import com.zeen.zeendemo.scroll_rv.ScrollRvActivity;
 import com.zeen.zeendemo.tracerv.TimeLineActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -100,4 +101,9 @@ public class MainActivity extends AppCompatActivity {
     public void goWeight(View view) {
         startActivity(new Intent(this, WeightActivity.class));
     }
+
+    public void goScrollRv(View view) {
+        startActivity(new Intent(this, ScrollRvActivity.class));
+    }
+
 }
