@@ -83,11 +83,11 @@
         android:onClick="goQAViews"
         android:text="go QAView" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goWeight"
-        android:text="go WeightCheck" />
+<!--    <Button-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:onClick="goWeight"-->
+<!--        android:text="go WeightCheck" />-->
 
     <Button
         android:layout_width="match_parent"

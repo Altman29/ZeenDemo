@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.zeen.zeendemo.answer_views.AnswerViewsActivity;
-import com.zeen.zeendemo.answer_views.withexra.WeightActivity;
 import com.zeen.zeendemo.countrypicker.CountryActivity;
 import com.zeen.zeendemo.fragmentVpFragment.Fvpf;
 import com.zeen.zeendemo.horizontal_lineview.NewLineActivity;
@@ -98,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, AnswerViewsActivity.class));
     }
 
-    public void goWeight(View view) {
-        startActivity(new Intent(this, WeightActivity.class));
-    }
+//    public void goWeight(View view) {
+//        startActivity(new Intent(this, WeightActivity.class));
+//    }
 
     public void goScrollRv(View view) {
         startActivity(new Intent(this, ScrollRvActivity.class));
