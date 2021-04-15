@@ -21,7 +21,6 @@ public class TimeLineActivity extends AppCompatActivity {
     private RecyclerView Rv;
     private List<TimeLineBean> listItem;
     private MyAdapter myAdapter;
-    private List<Integer> mListStamp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +38,8 @@ public class TimeLineActivity extends AppCompatActivity {
     // 初始化显示的数据
     public void initData() {
         listItem = new ArrayList<TimeLineBean>();
-        mListStamp = new ArrayList<>();
 
         for (int i = 0; i < 6; i++) {
-            mListStamp.add(listItem.size());//对应月份的坐标 数据月份需要独立获取(因为给到的数据 月份应该是create_time) 需要单独添加到List中 type为time
             listItem.add(new TimeLineBean(1,"" ,i+"月"));
             for (int j = 0; j < new Random().nextInt(3) + 2; j++) {
                 listItem.add(new TimeLineBean(2,"内容内容内容内容" + i + "-" +j,i+"月"));
@@ -58,8 +55,7 @@ public class TimeLineActivity extends AppCompatActivity {
         Rv.setLayoutManager(layoutManager);
 
         //用自定义分割线类设置分割线
-//        Rv.addItemDecoration(new TimeLine(this, mListStamp));
-        Rv.addItemDecoration(new TimeLineItemDecoration(this, mListStamp));
+        Rv.addItemDecoration(new TimeLineItemDecoration(this));
 
         //为ListView绑定适配器
         myAdapter = new MyAdapter(this, listItem);
