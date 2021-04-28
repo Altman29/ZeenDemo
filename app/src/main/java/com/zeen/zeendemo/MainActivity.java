@@ -12,6 +12,7 @@ import com.zeen.zeendemo.fragmentVpFragment.Fvpf;
 import com.zeen.zeendemo.horizontal_lineview.NewLineActivity;
 import com.zeen.zeendemo.horizontallist.HorizontalRvActivity;
 import com.zeen.zeendemo.linechartview.LineChartActivity;
+import com.zeen.zeendemo.mpchart.LineChartDemo;
 import com.zeen.zeendemo.ninepath.NinePathActivity;
 import com.zeen.zeendemo.pieview.PieChartActivity;
 import com.zeen.zeendemo.scroll_rv.ScrollRvActivity;
@@ -103,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void goScrollRv(View view) {
         startActivity(new Intent(this, ScrollRvActivity.class));
+    }
+
+    public void goMpLineChart(View view) {
+        startActivity(new Intent(this, LineChartDemo.class));
     }
 
 }

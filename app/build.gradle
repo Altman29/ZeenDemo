@@ -46,6 +46,7 @@ dependencies {
     api deps.fastjson
     api deps.flexbox
     api deps.glide
+    api deps.androidChart
     annotationProcessor deps.butterknifeProcessor
     annotationProcessor deps.glideProcessor
 

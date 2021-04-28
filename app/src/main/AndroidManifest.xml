@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZeenDemo">
-        <activity android:name=".auto_scroll_rv.AutoScrollRvActivity"></activity>
+        <activity android:name=".mpchart.LineChartActivity"></activity>
+        <activity android:name=".auto_scroll_rv.AutoScrollRvActivity" />
         <activity android:name=".scroll_rv.ScrollRvActivity" />
         <activity android:name=".answer_views.withexra.WeightActivity" />
         <activity android:name=".answer_views.AnswerViewsActivity" />
@@ -21,6 +22,7 @@
         <activity android:name=".horizontallist.HorizontalRvActivity" />
         <activity android:name=".countrypicker.CountryActivity" />
         <activity android:name=".tracerv.TimeLineActivity" />
+        <activity android:name=".mpchart.LineChartDemo" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

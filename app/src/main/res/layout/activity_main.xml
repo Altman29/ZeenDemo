@@ -92,7 +92,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="goScrollRv"
+        android:onClick="goMpLineChartgoScrollRv"
         android:text="go ScrollRv" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goMpLineChart"
+        android:text="go MpLineChart" />
 
 </LinearLayout>
