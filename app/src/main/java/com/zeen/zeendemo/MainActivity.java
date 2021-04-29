@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.zeen.zeendemo.answer_views.AnswerViewsActivity;
+import com.zeen.zeendemo.bottomnav.BottomNavActivity;
 import com.zeen.zeendemo.countrypicker.CountryActivity;
 import com.zeen.zeendemo.fragmentVpFragment.Fvpf;
 import com.zeen.zeendemo.horizontal_lineview.NewLineActivity;
@@ -110,4 +111,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, LineChartDemo.class));
     }
 
+    public void goNavActivity(View view) {
+        startActivity(new Intent(this, BottomNavActivity.class));
+    }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_today"
+        android:icon="@drawable/navigation_today_icon"
+        android:title="Today"
+        />
+
+    <item
+        android:id="@+id/navigation_past"
+        android:icon="@drawable/navigation_past_icon"
+        android:title="Past" />
+
+    <item
+        android:id="@+id/navigation_relax"
+        android:icon="@drawable/navigation_relax_icon"
+        android:title="Relax" />
+
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@drawable/navigation_mine_icon"
+        android:title="Mine" />
+</menu>

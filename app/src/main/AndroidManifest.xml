@@ -3,13 +3,16 @@
     package="com.zeen.zeendemo">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZeenDemo">
-        <activity android:name=".mpchart.LineChartActivity"></activity>
+        <activity android:name=".bottomnav.Activity_quiz"></activity>
+        <activity android:name=".bottomnav.BottomNavActivity" />
+        <activity android:name=".mpchart.LineChartActivity" />
         <activity android:name=".auto_scroll_rv.AutoScrollRvActivity" />
         <activity android:name=".scroll_rv.ScrollRvActivity" />
         <activity android:name=".answer_views.withexra.WeightActivity" />

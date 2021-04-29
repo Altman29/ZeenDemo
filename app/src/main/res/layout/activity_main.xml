@@ -101,4 +101,10 @@
         android:onClick="goMpLineChart"
         android:text="go MpLineChart" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goNavActivity"
+        android:text="go NavActivity" />
+
 </LinearLayout>
