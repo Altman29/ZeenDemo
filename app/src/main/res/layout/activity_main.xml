@@ -107,4 +107,10 @@
         android:onClick="goNavActivity"
         android:text="go NavActivity" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goRLVActivity"
+        android:text="go RLVActivity" />
+
 </LinearLayout>
