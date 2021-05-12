@@ -6,18 +6,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.zeen.zeendemo.answer_views.AnswerViewsActivity;
+import com.zeen.zeendemo.bottomnav.BottomNavActivity;
 import com.zeen.zeendemo.countrypicker.CountryActivity;
 import com.zeen.zeendemo.fragmentVpFragment.Fvpf;
 import com.zeen.zeendemo.horizontal_lineview.NewLineActivity;
 import com.zeen.zeendemo.horizontallist.HorizontalRvActivity;
+import com.zeen.zeendemo.linechart_recently.LCVActivity;
 import com.zeen.zeendemo.linechartview.LineChartActivity;
+import com.zeen.zeendemo.mpchart.LineChartDemo;
 import com.zeen.zeendemo.ninepath.NinePathActivity;
 import com.zeen.zeendemo.pieview.PieChartActivity;
 import com.zeen.zeendemo.scroll_rv.ScrollRvActivity;
 import com.zeen.zeendemo.tracerv.TimeLineActivity;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -105,4 +108,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ScrollRvActivity.class));
     }
 
+    public void goMpLineChart(View view) {
+        startActivity(new Intent(this, LineChartDemo.class));
+    }
+
+    public void goNavActivity(View view) {
+        startActivity(new Intent(this, BottomNavActivity.class));
+    }
+
+
+    public void goRLVActivity(View view) {
+        startActivity(new Intent(this, LCVActivity.class));
+    }
 }

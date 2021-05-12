@@ -92,7 +92,25 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="goScrollRv"
+        android:onClick="goMpLineChartgoScrollRv"
         android:text="go ScrollRv" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goMpLineChart"
+        android:text="go MpLineChart" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goNavActivity"
+        android:text="go NavActivity" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goRLVActivity"
+        android:text="go RLVActivity" />
 
 </LinearLayout>

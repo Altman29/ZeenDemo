@@ -6,13 +6,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Rect;
 import android.view.View;
 
 import com.zeen.zeendemo.R;
-
-import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,14 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
 
     private Paint mPaint;
-    private Path mPath;
 
     // 左 上偏移长度
     private int itemView_leftinterval;
     private int itemView_topinterval;
 
-    // 轴点半径
-    private int circle_radius;
     // 路径原点半径
     private int point_radius;
 
@@ -40,12 +34,11 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
     private final int mWidth;
     private final int mHeight;
 
-    public TimeLineItemDecoration(Context context, List<Integer> list) {
+    public TimeLineItemDecoration(Context context) {
 
         mPaint = new Paint();
         mPaint.setColor(context.getResources().getColor(R.color.trace_point)); // 时间线颜色
         mPaint.setPathEffect(new DashPathEffect(new float[]{5, 5}, 0));
-        mPath = new Path();
 
         // 赋值ItemView的左偏移长度为200
         itemView_leftinterval = 200;
@@ -54,7 +47,6 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
         itemView_topinterval = 50;
 
         // 赋值轴点圆的半径为16 虚线点5
-        circle_radius = 16;
         point_radius = 5;
 
         // 获取图标资源
@@ -78,19 +70,13 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
         int viewCount = parent.getChildCount();
         View first = parent.getChildAt(0);
         View last = parent.getChildAt(viewCount - 1);
-
         float centerX = itemView_leftinterval / 2;
-
         float lineY = (float) first.getTop();
-
         //画虚线点 lineY+30(间隔)
         while (lineY <= last.getBottom()) {
             lineY = lineY + 40;
-
             c.drawCircle(centerX, lineY, point_radius, mPaint);
-
         }
-
         //画月份Item点
         for (int i = 0; i < viewCount; i++) {
             View child = parent.getChildAt(i);
@@ -101,11 +87,6 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
                 float centerY = child.getTop() + (child.getHeight()) / 2;
                 c.drawBitmap(mIcon, centerX - mWidth / 2, centerY - mHeight / 2, mPaint);
             }
-
         }
-
-
     }
-
-
 }

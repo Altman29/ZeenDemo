@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:linchart="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".linechart_recently.LCVActivity">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.zeen.zeendemo.linechart_recently.LineChartView
+                android:id="@+id/lineChart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                linchart:bottomInterval="20dp"
+                linchart:dividerCount="5"
+                linchart:leftInterval="20dp"
+                linchart:lineColor="@color/colorLine"
+                linchart:topInterval="40dp"
+                linchart:xInterval="70dp"
+                linchart:yAxisFontSize="14sp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</RelativeLayout>
