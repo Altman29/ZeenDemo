@@ -3,6 +3,7 @@ package com.example.javalib.convertList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class Test {
 
@@ -25,17 +26,40 @@ public class Test {
 
         System.out.println(itemList.size());
 
+
+        Callable<Object> callable = new Callable<Object>() {
+            public Object call() throws Exception {
+                return null;
+
+            }
+        };
+
+        if (callable != null) {
+
+        }
+
+        if (callable instanceof Object) {
+            Object o = (Object) callable;
+
+        }
+
+
+        new ArrayList<>();
+
+
         for (Item item : itemList) {
             System.out.println(item.toString());
         }
 
         System.out.println("==========================================");
 
-        List<Item> result =convertItem(itemList);
+        List<Item> result = convertItem(itemList);
         System.out.println(result.size());
         for (Item item : result) {
             System.out.println(item.toString());
         }
+
+
 
     }
 
@@ -49,7 +73,7 @@ public class Test {
                 result.add(new Item(tempA));
             }
             result.add(item);
-            tempB= tempA;
+            tempB = tempA;
         }
         return result;
     }
