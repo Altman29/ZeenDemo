@@ -1,122 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goTrace"
-        android:text="go Trace" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goHorizontalRv"
-        android:text="go HorizontalRv" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/but"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv"
-            android:onClick="goCountryPicker"
-            android:text="进入城市选择页面" />
+            android:onClick="goTrace"
+            android:text="go Trace" />
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="区号"
-            android:textSize="20dp" />
+            android:onClick="goHorizontalRv"
+            android:text="go HorizontalRv" />
 
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_toRightOf="@+id/tv"
-            android:text="国家名"
-            android:textSize="20dp" />
-    </RelativeLayout>
+            android:onClick="goNine"
+            android:text="go NinePath" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goNine"
-        android:text="go NinePath" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goFVpF"
+            android:text="go FragmentVpF" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goFVpF"
-        android:text="go FragmentVpF" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goLineChart"
+            android:text="go LineChartView" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goLineChart"
-        android:text="go LineChartView" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goLineView"
+            android:text="go NewLineView" />
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goLineView"
-        android:text="go NewLineView" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goRingView"
+            android:text="go RingView" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goRingView"
-        android:text="go RingView" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goQAViews"
+            android:text="go QAView" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goQAViews"
-        android:text="go QAView" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goMpLineChartgoScrollRv"
+            android:text="go ScrollRv" />
 
-<!--    <Button-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:onClick="goWeight"-->
-<!--        android:text="go WeightCheck" />-->
+        <!--    <Button-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:onClick="goWeight"-->
+        <!--        android:text="go WeightCheck" />-->
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goMpLineChartgoScrollRv"
-        android:text="go ScrollRv" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goMpLineChart"
+            android:text="go MpLineChart" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goMpLineChart"
-        android:text="go MpLineChart" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goNavActivity"
+            android:text="go NavActivity" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goNavActivity"
-        android:text="go NavActivity" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goRLVActivity"
+            android:text="go RLVActivity" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goRLVActivity"
-        android:text="go RLVActivity" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goTask"
+            android:text="go task" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goTask"
-        android:text="go task" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</LinearLayout>
+            <Button
+                android:id="@+id/but"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv"
+                android:onClick="goCountryPicker"
+                android:text="进入城市选择页面" />
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="区号"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_toRightOf="@+id/tv"
+                android:text="国家名"
+                android:textSize="20dp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>
