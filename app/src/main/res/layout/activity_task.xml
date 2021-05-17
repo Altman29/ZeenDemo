@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".task.TaskActivity">
+
+    <Button
+        android:id="@+id/bt_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/shape_feedback_btn"
+        android:enabled="false"
+        android:text="保存"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/iv_upload"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:layout_below="@+id/rl_task_answer"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:visibility="visible"
+        android:scaleType="center"
+        android:background="@mipmap/upload_img" />
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/rl_task_answer"
+        android:layout_marginStart="90dp"
+        android:scaleType="centerInside"
+        android:src="@mipmap/img_delete"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_task_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleToolBar"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:id="@+id/tv_task_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:lineHeight="22dp"
+            android:text="你的手机里是否有一张照片，每次看到它你就会不由自主的微笑？把背后的故事记录下来吧，这能帮助你重返快乐时光。？"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_introduction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:lineHeight="22dp"
+            android:layout_below="@+id/tv_task_desc"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:text="照片里面有谁，发生了什么，它为何让你露出笑容"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_task_answer"
+        android:layout_width="match_parent"
+        android:layout_height="162dp"
+        android:layout_below="@+id/rl_task_desc"
+        android:layout_margin="16dp"
+        android:background="@drawable/shape_setting_edit"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/et_task_answer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tv_answer_number"
+            android:layout_margin="12dp"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="找出一张照片，写下背后的故事吧！"
+            android:lineSpacingExtra="6dp"
+            android:maxLength="200"
+            android:textColor="@color/black"
+            android:textColorHint="#66576271"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_answer_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:text="0/200"
+            android:textColor="#80576271"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <com.zeen.zeendemo.ui.TitleToolBarView
+        android:id="@+id/titleToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backResId="@mipmap/quiz_back"
+        app:titleText="ta的优点"
+        app:titleTextColor="@color/black" />
+
+
+</RelativeLayout>

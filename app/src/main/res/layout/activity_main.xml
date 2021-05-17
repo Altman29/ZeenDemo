@@ -113,4 +113,10 @@
         android:onClick="goRLVActivity"
         android:text="go RLVActivity" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goTask"
+        android:text="go task" />
+
 </LinearLayout>

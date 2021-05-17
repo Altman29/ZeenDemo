@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZeenDemo">
+        <activity android:name=".task.TaskActivity" />
         <activity android:name=".linechart_recently.LCVActivity"></activity>
         <activity android:name=".bottomnav.Activity_quiz" />
         <activity android:name=".bottomnav.BottomNavActivity" />

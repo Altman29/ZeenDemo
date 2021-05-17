@@ -20,6 +20,7 @@ import com.zeen.zeendemo.mpchart.LineChartDemo;
 import com.zeen.zeendemo.ninepath.NinePathActivity;
 import com.zeen.zeendemo.pieview.PieChartActivity;
 import com.zeen.zeendemo.scroll_rv.ScrollRvActivity;
+import com.zeen.zeendemo.task.TaskActivity;
 import com.zeen.zeendemo.tracerv.TimeLineActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -119,5 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void goRLVActivity(View view) {
         startActivity(new Intent(this, LCVActivity.class));
+    }
+
+    public void goTask(View view) {
+        startActivity(new Intent(this, TaskActivity.class));
     }
 }
