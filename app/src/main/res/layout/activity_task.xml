@@ -11,10 +11,10 @@
         android:id="@+id/bt_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:layout_below="@+id/iv_upload"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="@dimen/qb_px_48"
+        android:layout_marginEnd="@dimen/qb_px_48"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/qb_px_70"
         android:background="@drawable/shape_feedback_btn"
         android:enabled="false"
         android:text="保存"
@@ -23,21 +23,21 @@
 
     <ImageView
         android:id="@+id/iv_upload"
-        android:layout_width="86dp"
-        android:layout_height="86dp"
+        android:layout_width="@dimen/qb_px_86"
+        android:layout_height="@dimen/qb_px_86"
         android:layout_below="@+id/rl_task_answer"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="@dimen/qb_px_12"
+        android:layout_marginTop="@dimen/qb_px_12"
         android:background="@mipmap/upload_img"
         android:scaleType="center"
         android:visibility="visible" />
 
     <ImageView
         android:id="@+id/iv_delete"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/qb_px_24"
+        android:layout_height="@dimen/qb_px_24"
         android:layout_below="@+id/rl_task_answer"
-        android:layout_marginStart="90dp"
+        android:layout_marginStart="@dimen/qb_px_90"
         android:scaleType="centerInside"
         android:src="@mipmap/img_delete"
         android:visibility="gone" />
@@ -47,14 +47,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleToolBar"
-        android:layout_margin="16dp">
+        android:layout_margin="@dimen/qb_px_16">
 
         <TextView
             android:id="@+id/tv_task_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:lineHeight="22dp"
+            android:layout_margin="@dimen/qb_px_8"
+            android:lineHeight="@dimen/qb_px_22"
             android:text="你的手机里是否有一张照片，每次看到它你就会不由自主的微笑？把背后的故事记录下来吧，这能帮助你重返快乐时光。？"
             android:textColor="#000000"
             android:textSize="14sp" />
@@ -64,8 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_task_desc"
-            android:layout_margin="8dp"
-            android:lineHeight="22dp"
+            android:layout_margin="@dimen/qb_px_8"
+            android:lineHeight="@dimen/qb_px_22"
             android:text="照片里面有谁，发生了什么，它为何让你露出笑容"
             android:textColor="#000000"
             android:textSize="14sp" />
@@ -74,9 +74,9 @@
     <RelativeLayout
         android:id="@+id/rl_task_answer"
         android:layout_width="match_parent"
-        android:layout_height="162dp"
+        android:layout_height="@dimen/qb_px_162"
         android:layout_below="@+id/rl_task_desc"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/qb_px_16"
         android:background="@drawable/shape_setting_edit"
         android:focusable="true"
         android:focusableInTouchMode="true">
@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/tv_answer_number"
-            android:layout_margin="12dp"
+            android:layout_margin="@dimen/qb_px_12"
             android:background="@null"
             android:gravity="start"
             android:hint="找出一张照片，写下背后的故事吧！"
@@ -102,8 +102,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="@dimen/qb_px_12"
+            android:layout_marginBottom="@dimen/qb_px_12"
             android:text="0/200"
             android:textColor="#80576271"
             android:textSize="14sp" />
