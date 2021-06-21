@@ -97,6 +97,12 @@
             android:onClick="goTask"
             android:text="go task" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goNewChartAc"
+            android:text="goNewChartActivity" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

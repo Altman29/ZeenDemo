@@ -1,3 +1,4 @@
 include ':javalib'
 include ':app'
+include 'MPChartLib'
 rootProject.name = "ZeenDemo"

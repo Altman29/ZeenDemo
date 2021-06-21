@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DayShine">
         <activity android:name=".task.TaskActivity" />
+        <activity android:name=".newchart.NewChartActivity"></activity>
         <activity android:name=".linechart_recently.LCVActivity"></activity>
         <activity android:name=".bottomnav.Activity_quiz" />
         <activity android:name=".bottomnav.BottomNavActivity" />

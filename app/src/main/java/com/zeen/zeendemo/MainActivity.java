@@ -17,6 +17,7 @@ import com.zeen.zeendemo.horizontallist.HorizontalRvActivity;
 import com.zeen.zeendemo.linechart_recently.LCVActivity;
 import com.zeen.zeendemo.linechartview.LineChartActivity;
 import com.zeen.zeendemo.mpchart.LineChartDemo;
+import com.zeen.zeendemo.newchart.NewChartActivity;
 import com.zeen.zeendemo.ninepath.NinePathActivity;
 import com.zeen.zeendemo.pieview.PieChartActivity;
 import com.zeen.zeendemo.scroll_rv.ScrollRvActivity;
@@ -124,5 +125,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void goTask(View view) {
         startActivity(new Intent(this, TaskActivity.class));
+    }
+
+    public void goNewChartAc(View view) {
+        startActivity(new Intent(this, NewChartActivity.class));
     }
 }

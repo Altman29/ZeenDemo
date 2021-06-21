@@ -4,6 +4,7 @@
     <option name="BUILD_PROCESS_HEAP_SIZE" value="1024" />
     <bytecodeTargetLevel target="1.7">
       <module name="ZeenDemo.app" target="1.8" />
+      <module name="ZeenDemo.MPChartLib" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
