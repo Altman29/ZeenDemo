@@ -4,14 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
     tools:context=".newchart.NewChartActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#fff">
+
+            <com.zeen.zeendemo.newchart.MySwitchTabLayout
+                android:id="@+id/mytab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl1"
@@ -27,8 +39,7 @@
         <RelativeLayout
             android:id="@+id/rl2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <com.github.mikephil.charting.charts.CombinedChart
                 android:id="@+id/chart2"
@@ -39,8 +50,7 @@
         <RelativeLayout
             android:id="@+id/rl3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <com.github.mikephil.charting.charts.CombinedChart
                 android:id="@+id/chart3"

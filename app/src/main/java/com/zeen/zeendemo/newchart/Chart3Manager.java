@@ -56,12 +56,12 @@ public class Chart3Manager {
 
         //设置图例相关
         Legend l = chart.getLegend();
-        l.setEnabled(false);
+        l.setEnabled(true);
         l.setWordWrapEnabled(true);
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setForm(Legend.LegendForm.CIRCLE);//统一设置图例样式
+        l.setForm(Legend.LegendForm.LINE);//统一设置图例样式
         l.setDrawInside(false);
         l.setTextSize(12f);
         l.setFormToTextSpace(8f);//设置图例(形状)和标签的间距

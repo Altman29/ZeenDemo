@@ -58,7 +58,7 @@ public class Chart2Manager {
 
         //设置图例相关
         Legend l = chart.getLegend();
-        l.setEnabled(false);
+        l.setEnabled(true);
         l.setWordWrapEnabled(true);
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);

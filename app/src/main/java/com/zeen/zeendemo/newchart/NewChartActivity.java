@@ -1,6 +1,7 @@
 package com.zeen.zeendemo.newchart;
 
 import android.os.Bundle;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,14 +16,14 @@ import com.zeen.zeendemo.R;
 import java.util.ArrayList;
 
 public class NewChartActivity extends AppCompatActivity {
-    private final int count = 7;//7 or 14
+    private int count = 7;//7 or 14
     private CombinedChart chart1;
     private CombinedChart chart2;
     private CombinedChart chart3;
-    private boolean isShowValues = false;//Bar,Line是否显示数值
     private Chart1Manager chart1Manager;
     private Chart2Manager chart2Manager;
     private Chart3Manager chart3Manager;
+    private MySwitchTabLayout timesTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,32 +38,60 @@ public class NewChartActivity extends AppCompatActivity {
         chart2Manager = new Chart2Manager(chart2);
         chart3Manager = new Chart3Manager(chart3);
 
+        timesTab = findViewById(R.id.mytab);
+
+        timesTab.setOnItemCheckedChangeListener(new MySwitchTabLayout.OnItemCheckedChangeListener() {
+            @Override
+            public void onItemCheckedChange(boolean isChecked) {
+                if (isChecked) {
+                    switchData(14);
+                } else {
+                    switchData(7);
+                }
+            }
+        });
+        getData();
+    }
+
+    public void getData() {
         //setData chart1
         CombinedData data1 = new CombinedData();
         data1.setData(fetch1_LineData());
         data1.setData(fetch1_BarData());
+        //fix data(包括数据填充;x,y轴values显示,需加参数) & show； chart1
+        chart1Manager.fix(data1);
+        chart1Manager.show();
 
         //setData chart2
         CombinedData data2 = new CombinedData();
         data2.setData(fetch2_LineData());
         data2.setData(fetch2_BarData());
-
-        //setData chart3
-        CombinedData data3 = new CombinedData();
-        data3.setData(fetch3_LineData());
-
-        //fix data(包括数据填充;x,y轴values显示,需加参数) & show； chart1
-        chart1Manager.fix(data1);
-        chart1Manager.show();
-
         //fix data(包括数据填充;x,y轴values显示,需加参数) & show； chart2
         chart2Manager.fix(data2);
         chart2Manager.show();
 
+        //setData chart3
+        CombinedData data3 = new CombinedData();
+        data3.setData(fetch3_LineData());
         //fix data(包括数据填充;x,y轴values显示,需加参数) & show； chart3
         chart3Manager.fix(data3);
         chart3Manager.show();
 
+    }
+
+    private void clearData() {
+        chart1.clear();
+        chart1.animateY(500);
+        chart2.clear();
+        chart2.animateY(500);
+        chart3.clear();
+        chart3.animateY(500);
+    }
+
+    private void switchData(int count) {
+        clearData();
+        this.count = count;
+        getData();
     }
 
 
@@ -80,9 +109,9 @@ public class NewChartActivity extends AppCompatActivity {
         ArrayList<BarEntry> entries2 = new ArrayList<>();
         //需要数据转换，(网络)外部传入数据，并处理
         for (int index = 0; index < count; index++) {
-            entries1.add(new BarEntry(0, getRandom(5, 0)));
+            entries1.add(new BarEntry(index + 0.5f, getRandom(5, 0)));
             // stacked
-            entries2.add(new BarEntry(0, new float[]{getRandom(2, 0), getRandom(3, 0)}));
+            entries2.add(new BarEntry(index + 0.5f, new float[]{getRandom(2, 0), getRandom(3, 0)}));
         }
         return chart1Manager.generateBarData(entries1, entries2);
     }
