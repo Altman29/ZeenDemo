@@ -7,6 +7,7 @@ import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.XAxis.XAxisPosition;
 import com.github.mikephil.charting.components.YAxis;
@@ -18,6 +19,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copyright©  2021
@@ -30,6 +32,7 @@ public class Chart3Manager {
 
     private CombinedChart chart;
     private boolean isShowValues = false;//Bar,Line是否显示数值
+    private Legend legend;
 
     public Chart3Manager(CombinedChart chart) {
         this.chart = chart;
@@ -55,20 +58,21 @@ public class Chart3Manager {
         });
 
         //设置图例相关
-        Legend l = chart.getLegend();
-        l.setEnabled(true);
-        l.setWordWrapEnabled(true);
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setForm(Legend.LegendForm.LINE);//统一设置图例样式
-        l.setDrawInside(false);
-        l.setTextSize(12f);
-        l.setFormToTextSpace(8f);//设置图例(形状)和标签的间距
-        l.setXEntrySpace(8f);//X轴上图例间距
-        l.setYEntrySpace(8f);//Y轴上图例间距
-        //以百分比为单位，将整个图表视图相对整个父类View设置百分比。默认0.95f(95%).超过则换行。(但是换行后因为设置了xEntrySpace不再居左)
-        l.setMaxSizePercent(0.95f);
+        legend = chart.getLegend();
+        setCustomLegend();
+        // l.setEnabled(true);
+        // l.setWordWrapEnabled(true);
+        // l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        // l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        // l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        // l.setForm(Legend.LegendForm.LINE);//统一设置图例样式
+        // l.setDrawInside(false);
+        // l.setTextSize(12f);
+        // l.setFormToTextSpace(8f);//设置图例(形状)和标签的间距
+        // l.setXEntrySpace(8f);//X轴上图例间距
+        // l.setYEntrySpace(8f);//Y轴上图例间距
+        // //以百分比为单位，将整个图表视图相对整个父类View设置百分比。默认0.95f(95%).超过则换行。(但是换行后因为设置了xEntrySpace不再居左)
+        // l.setMaxSizePercent(0.95f);
 
         //right Y
         YAxis rightAxis = chart.getAxisRight();
@@ -99,12 +103,40 @@ public class Chart3Manager {
         //X
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxisPosition.BOTTOM);//X轴设置在底部
+        xAxis.setDrawAxisLine(false);
         xAxis.setDrawGridLines(false);//只画值，不画线
         xAxis.setAxisMinimum(0f);//最小0
         xAxis.setGranularity(1f);//粒度1
         xAxis.setTextColor(Color.parseColor("#FFC4C4CC"));
         xAxis.setTextSize(12f);
         xAxis.setCenterAxisLabels(true);//针对每个X坐标，X的坐标显示居中
+    }
+
+    public void setCustomLegend() {
+        List<LegendEntry> entries = new ArrayList<>();
+        entries.add(new LegendEntry());
+        entries.add(new LegendEntry(
+                "睡眠满意度",
+                Legend.LegendForm.LINE,
+                8f,
+                1.5f,
+                null,
+                Color.parseColor("#FF72A4E1"))
+        );
+        entries.add(new LegendEntry(
+                "日间满意度",
+                Legend.LegendForm.LINE,
+                8f,
+                1.5f,
+                null,
+                Color.parseColor("#FF4FB6A6"))
+        );
+
+        legend.setCustom(entries);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        legend.setXEntrySpace(16f);
+        legend.setTextSize(12f);
+        legend.setXOffset(-40f);
     }
 
     /**
@@ -150,16 +182,27 @@ public class Chart3Manager {
         return d;
     }
 
-    public void fix(CombinedData data) {
+    public void fix(CombinedData data, int count) {
         chart.setData(data);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setAxisMaximum(data.getXMax() + 0.5f);//just show nice
+
+        xAxis.setLabelCount(count, false);
         //底部X轴显示
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return (int) value + "";
+                int index = (int) value;
+                if (count == 14) {
+                    if (index % 2 == 1) {
+                        return "";
+                    } else {
+                        return (int) value + "";
+                    }
+                } else {
+                    return (int) value + "";
+                }
             }
         });
 

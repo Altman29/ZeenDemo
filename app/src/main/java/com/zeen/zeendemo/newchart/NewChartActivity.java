@@ -1,7 +1,6 @@
 package com.zeen.zeendemo.newchart;
 
 import android.os.Bundle;
-import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,7 +58,7 @@ public class NewChartActivity extends AppCompatActivity {
         data1.setData(fetch1_LineData());
         data1.setData(fetch1_BarData());
         //fix data(包括数据填充;x,y轴values显示,需加参数) & show； chart1
-        chart1Manager.fix(data1);
+        chart1Manager.fix(data1,count);
         chart1Manager.show();
 
         //setData chart2
@@ -67,14 +66,14 @@ public class NewChartActivity extends AppCompatActivity {
         data2.setData(fetch2_LineData());
         data2.setData(fetch2_BarData());
         //fix data(包括数据填充;x,y轴values显示,需加参数) & show； chart2
-        chart2Manager.fix(data2);
+        chart2Manager.fix(data2,count);
         chart2Manager.show();
 
         //setData chart3
         CombinedData data3 = new CombinedData();
         data3.setData(fetch3_LineData());
         //fix data(包括数据填充;x,y轴values显示,需加参数) & show； chart3
-        chart3Manager.fix(data3);
+        chart3Manager.fix(data3,count);
         chart3Manager.show();
 
     }
