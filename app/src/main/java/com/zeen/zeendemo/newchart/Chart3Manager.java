@@ -60,19 +60,6 @@ public class Chart3Manager {
         //设置图例相关
         legend = chart.getLegend();
         setCustomLegend();
-        // l.setEnabled(true);
-        // l.setWordWrapEnabled(true);
-        // l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        // l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        // l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        // l.setForm(Legend.LegendForm.LINE);//统一设置图例样式
-        // l.setDrawInside(false);
-        // l.setTextSize(12f);
-        // l.setFormToTextSpace(8f);//设置图例(形状)和标签的间距
-        // l.setXEntrySpace(8f);//X轴上图例间距
-        // l.setYEntrySpace(8f);//Y轴上图例间距
-        // //以百分比为单位，将整个图表视图相对整个父类View设置百分比。默认0.95f(95%).超过则换行。(但是换行后因为设置了xEntrySpace不再居左)
-        // l.setMaxSizePercent(0.95f);
 
         //right Y
         YAxis rightAxis = chart.getAxisRight();
@@ -154,9 +141,6 @@ public class Chart3Manager {
         set1.setColor(Color.parseColor("#FF72A4E1"));
         set1.setLineWidth(2f);
         set1.setDrawCircles(false);
-        // set1.setCircleColor(Color.rgb(240, 238, 70));
-        // set1.setCircleRadius(0f);
-        set1.setFillColor(Color.rgb(240, 238, 70));
         set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);//三次贝塞尔曲线
         set1.setDrawValues(isShowValues);
         set1.setValueTextSize(10f);
@@ -168,9 +152,6 @@ public class Chart3Manager {
         set2.setColor(Color.parseColor("#FF4FB6A6"));
         set2.setLineWidth(2f);
         set2.setDrawCircles(false);
-        // set2.setCircleColor(Color.rgb(240, 238, 70));
-        // set2.setCircleRadius(0f);
-        set2.setFillColor(Color.rgb(240, 238, 70));
         set2.setMode(LineDataSet.Mode.CUBIC_BEZIER);//三次贝塞尔曲线
         set2.setDrawValues(isShowValues);
         set2.setValueTextSize(10f);
@@ -182,13 +163,13 @@ public class Chart3Manager {
         return d;
     }
 
-    public void fix(CombinedData data, int count) {
+    public void fixAxisWithDisplay(CombinedData data, int count) {
         chart.setData(data);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setAxisMaximum(data.getXMax() + 0.5f);//just show nice
-
         xAxis.setLabelCount(count, false);
+
         //底部X轴显示
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
@@ -206,8 +187,8 @@ public class Chart3Manager {
             }
         });
 
+        //左侧Y轴显示 已处理
         YAxis leftAxis = chart.getAxisLeft();
-        //左侧Y轴显示
         leftAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -229,18 +210,12 @@ public class Chart3Manager {
             }
         });
 
-        YAxis rightAxis = chart.getAxisRight();
-        //右侧Y轴显示
-        rightAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return (int) value * 20 + "%";
-            }
-        });
-
+        //show
+        chart.invalidate();
     }
 
-    public void show() {
-        chart.invalidate();
+    public void clear() {
+        chart.clear();
+        chart.animateY(500);
     }
 }

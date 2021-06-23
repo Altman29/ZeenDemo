@@ -62,19 +62,6 @@ public class Chart1Manager {
         //设置图例相关
         legend = chart.getLegend();
         setCustomLegend();
-        // l.setEnabled(true);
-        // l.setWordWrapEnabled(true);
-        // l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        // l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        // l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-        // l.setForm(Legend.LegendForm.CIRCLE);//统一设置图例样式
-        // l.setDrawInside(false);
-        // l.setTextSize(12f);
-        // l.setFormToTextSpace(8f);//设置图例(形状)和标签的间距
-        // l.setXEntrySpace(8f);//X轴上图例间距
-        // l.setYEntrySpace(8f);//Y轴上图例间距
-        //以百分比为单位，将整个图表视图相对整个父类View设置百分比。默认0.95f(95%).超过则换行。(但是换行后因为设置了xEntrySpace不再居左)
-        // l.setMaxSizePercent(0.95f);
 
         //right Y
         YAxis rightAxis = chart.getAxisRight();
@@ -85,7 +72,7 @@ public class Chart1Manager {
         rightAxis.setTextSize(12f);
         rightAxis.setAxisMaximum(5.5f);//基本坐标0-5，真实值在setValuesFormatter中设置
         rightAxis.setYOffset(-10f);//right Y values向上偏移
-        rightAxis.setDrawAxisLine(false);//只画值，不画线
+        rightAxis.setDrawAxisLine(false);
 
         //left Y
         YAxis leftAxis = chart.getAxisLeft();
@@ -99,7 +86,7 @@ public class Chart1Manager {
         leftAxis.setYOffset(-10f);//left Y values向上偏移
         leftAxis.setGridDashedLine(new DashPathEffect(new float[]{8f, 8f}, 8f));
         leftAxis.setGridColor(Color.parseColor("#E1E1E1"));
-        leftAxis.setDrawAxisLine(false);//只画值，不画线
+        leftAxis.setDrawAxisLine(false);
 
         //X
         XAxis xAxis = chart.getXAxis();
@@ -167,9 +154,6 @@ public class Chart1Manager {
         set.setColor(Color.parseColor("#FFFFC166"));
         set.setLineWidth(2f);
         set.setDrawCircles(false);
-        // set.setCircleColor(Color.rgb(240, 238, 70));
-        // set.setCircleRadius(0f);
-        set.setFillColor(Color.rgb(240, 238, 70));
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);//三次贝塞尔曲线
         set.setDrawValues(isShowValues);
         set.setValueTextSize(10f);
@@ -204,8 +188,8 @@ public class Chart1Manager {
         set2.setAxisDependency(YAxis.AxisDependency.LEFT);
 
         float groupSpace = 0.3f;
-        float barSpace = 0.1f; // x2 dataset
-        float barWidth = 0.25f; // x2 dataset
+        float barSpace = 0.1f;
+        float barWidth = 0.25f;
         // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
 
         BarData d = new BarData(set2, set1);
@@ -217,12 +201,12 @@ public class Chart1Manager {
         return d;
     }
 
-    public void fix(CombinedData data, int count) {
+    //需要扩展参数列表，来控制两侧Y轴，X轴具体值显示
+    public void fixAxisWithDisplay(CombinedData data, int count) {
         chart.setData(data);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setAxisMaximum(data.getXMax() + 0.5f);//just show nice
-
         xAxis.setLabelCount(count, false);
 
         //底部X轴显示
@@ -231,7 +215,7 @@ public class Chart1Manager {
             public String getFormattedValue(float value, AxisBase axis) {
                 int index = (int) value;
                 if (count == 14) {
-                    if (index % 2 == 1) {
+                    if (index % 2 == 1) {//14 隔一显示
                         return "";
                     } else {
                         return (int) value + "";
@@ -242,8 +226,8 @@ public class Chart1Manager {
             }
         });
 
-        YAxis leftAxis = chart.getAxisLeft();
         //左侧Y轴显示
+        YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -251,18 +235,20 @@ public class Chart1Manager {
             }
         });
 
-        YAxis rightAxis = chart.getAxisRight();
         //右侧Y轴显示
+        YAxis rightAxis = chart.getAxisRight();
         rightAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
                 return (int) value * 20 + "%";
             }
         });
-
+        //show
+        chart.invalidate();
     }
 
-    public void show() {
-        chart.invalidate();
+    public void clear() {
+        chart.clear();
+        chart.animateY(500);
     }
 }

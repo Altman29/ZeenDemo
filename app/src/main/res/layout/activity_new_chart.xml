@@ -33,7 +33,7 @@
             <com.github.mikephil.charting.charts.CombinedChart
                 android:id="@+id/chart1"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="252dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -44,7 +44,7 @@
             <com.github.mikephil.charting.charts.CombinedChart
                 android:id="@+id/chart2"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="252dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -55,7 +55,7 @@
             <com.github.mikephil.charting.charts.CombinedChart
                 android:id="@+id/chart3"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="252dp" />
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>

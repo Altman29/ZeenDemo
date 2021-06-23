@@ -36,63 +36,51 @@ public class NewChartActivity extends AppCompatActivity {
         chart1Manager = new Chart1Manager(chart1);
         chart2Manager = new Chart2Manager(chart2);
         chart3Manager = new Chart3Manager(chart3);
-
         timesTab = findViewById(R.id.mytab);
 
         timesTab.setOnItemCheckedChangeListener(new MySwitchTabLayout.OnItemCheckedChangeListener() {
             @Override
             public void onItemCheckedChange(boolean isChecked) {
                 if (isChecked) {
-                    switchData(14);
+                    switchCount(14);
                 } else {
-                    switchData(7);
+                    switchCount(7);
                 }
             }
         });
-        getData();
+        showMultiChart();
     }
 
-    public void getData() {
-        //setData chart1
+    private void switchCount(int count) {
+        //clear&retry
+        chart1Manager.clear();
+        chart2Manager.clear();
+        chart3Manager.clear();
+        this.count = count;
+        showMultiChart();
+    }
+
+    public void showMultiChart() {
+        // chart1
         CombinedData data1 = new CombinedData();
         data1.setData(fetch1_LineData());
         data1.setData(fetch1_BarData());
         //fix data(包括数据填充;x,y轴values显示,需加参数) & show； chart1
-        chart1Manager.fix(data1,count);
-        chart1Manager.show();
+        chart1Manager.fixAxisWithDisplay(data1, count);
 
-        //setData chart2
+        // chart2
         CombinedData data2 = new CombinedData();
         data2.setData(fetch2_LineData());
         data2.setData(fetch2_BarData());
         //fix data(包括数据填充;x,y轴values显示,需加参数) & show； chart2
-        chart2Manager.fix(data2,count);
-        chart2Manager.show();
+        chart2Manager.fixAxisWithDisplay(data2, count);
 
-        //setData chart3
+        // chart3
         CombinedData data3 = new CombinedData();
         data3.setData(fetch3_LineData());
         //fix data(包括数据填充;x,y轴values显示,需加参数) & show； chart3
-        chart3Manager.fix(data3,count);
-        chart3Manager.show();
-
+        chart3Manager.fixAxisWithDisplay(data3, count);
     }
-
-    private void clearData() {
-        chart1.clear();
-        chart1.animateY(500);
-        chart2.clear();
-        chart2.animateY(500);
-        chart3.clear();
-        chart3.animateY(500);
-    }
-
-    private void switchData(int count) {
-        clearData();
-        this.count = count;
-        getData();
-    }
-
 
     private LineData fetch1_LineData() {
         ArrayList<Entry> entries = new ArrayList<>();
@@ -109,12 +97,11 @@ public class NewChartActivity extends AppCompatActivity {
         //需要数据转换，(网络)外部传入数据，并处理
         for (int index = 0; index < count; index++) {
             entries1.add(new BarEntry(index + 0.5f, getRandom(5, 0)));
-            // stacked
+            // stacked 注：俩个Bar而不是一个在其内。
             entries2.add(new BarEntry(index + 0.5f, new float[]{getRandom(2, 0), getRandom(3, 0)}));
         }
         return chart1Manager.generateBarData(entries1, entries2);
     }
-
 
     private LineData fetch2_LineData() {
         ArrayList<Entry> entries = new ArrayList<>();
@@ -134,7 +121,6 @@ public class NewChartActivity extends AppCompatActivity {
         return chart2Manager.generateBarData(entries);
     }
 
-
     private LineData fetch3_LineData() {
         ArrayList<Entry> entries1 = new ArrayList<>();
         ArrayList<Entry> entries2 = new ArrayList<>();
@@ -147,6 +133,7 @@ public class NewChartActivity extends AppCompatActivity {
     }
 
     protected float getRandom(float range, float start) {
+        //模拟数据
         return (float) (Math.random() * range) + start;
     }
 }
