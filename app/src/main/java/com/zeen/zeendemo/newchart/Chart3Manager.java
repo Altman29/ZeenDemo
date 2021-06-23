@@ -119,7 +119,7 @@ public class Chart3Manager {
                 "睡眠满意度",
                 Legend.LegendForm.LINE,
                 8f,
-                1.5f,
+                2f,
                 null,
                 Color.parseColor("#FF72A4E1"))
         );
@@ -127,7 +127,7 @@ public class Chart3Manager {
                 "日间满意度",
                 Legend.LegendForm.LINE,
                 8f,
-                1.5f,
+                2f,
                 null,
                 Color.parseColor("#FF4FB6A6"))
         );
@@ -152,7 +152,7 @@ public class Chart3Manager {
 
         LineDataSet set1 = new LineDataSet(entries2, "日间满意度");
         set1.setColor(Color.parseColor("#FF72A4E1"));
-        set1.setLineWidth(3.5f);
+        set1.setLineWidth(2f);
         set1.setDrawCircles(false);
         // set1.setCircleColor(Color.rgb(240, 238, 70));
         // set1.setCircleRadius(0f);
@@ -166,7 +166,7 @@ public class Chart3Manager {
 
         LineDataSet set2 = new LineDataSet(entries1, "睡眠满意度");
         set2.setColor(Color.parseColor("#FF4FB6A6"));
-        set2.setLineWidth(3.5f);
+        set2.setLineWidth(2f);
         set2.setDrawCircles(false);
         // set2.setCircleColor(Color.rgb(240, 238, 70));
         // set2.setCircleRadius(0f);

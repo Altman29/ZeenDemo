@@ -104,6 +104,7 @@ public class Chart1Manager {
         //X
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxisPosition.BOTTOM);//X轴设置在底部
+        xAxis.setDrawAxisLine(false);
         xAxis.setDrawGridLines(false);//只画值，不画线
         xAxis.setAxisMinimum(0f);//最小0
         xAxis.setGranularity(1f);//粒度1
@@ -142,7 +143,7 @@ public class Chart1Manager {
                 "睡眠效率",
                 Legend.LegendForm.LINE,
                 8f,
-                1.5f,
+                2f,
                 null,
                 Color.parseColor("#FFFFC166")));
 
@@ -164,7 +165,7 @@ public class Chart1Manager {
         LineData d = new LineData();
         LineDataSet set = new LineDataSet(entries, "睡眠效率");
         set.setColor(Color.parseColor("#FFFFC166"));
-        set.setLineWidth(3.5f);
+        set.setLineWidth(2f);
         set.setDrawCircles(false);
         // set.setCircleColor(Color.rgb(240, 238, 70));
         // set.setCircleRadius(0f);

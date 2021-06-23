@@ -128,7 +128,7 @@ public class Chart2Manager {
                 "醒来次数",
                 Legend.LegendForm.LINE,
                 8f,
-                1.5f,
+                2f,
                 null,
                 Color.parseColor("#FFFF9A9A"))
         );
@@ -151,7 +151,7 @@ public class Chart2Manager {
         LineData d = new LineData();
         LineDataSet set = new LineDataSet(entries, "醒来次数");
         set.setColor(Color.parseColor("#FFFF9A9A"));
-        set.setLineWidth(3.5f);
+        set.setLineWidth(2f);
         set.setDrawCircles(false);
         // set.setCircleColor(Color.rgb(240, 238, 70));
         // set.setCircleRadius(0f);
